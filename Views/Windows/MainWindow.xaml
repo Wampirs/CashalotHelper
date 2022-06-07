@@ -103,7 +103,7 @@
                                             <DataTemplate>
                                                 <Button x:Name="DelButton" Height="20" Width="20" Style="{StaticResource OpenFolderBtn}" 
                                         Command="{Binding ElementName=BackupsGrid, Path=DataContext.DelBackupCmd}" CommandParameter="{Binding ElementName=BackupsGrid, Path=DataContext.SelectedBackup}">
-                                                    <Image Source=".\Resources\delete.png" />
+                                                    <Image Source="/CashalotHelper;component/Resources/Images/Delete.png" />
                                                 </Button>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
