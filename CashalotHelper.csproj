@@ -17,7 +17,7 @@
     <None Remove="Resources\Images\Folder.png" />
     <None Remove="Resources\Images\Loading.png" />
     <None Remove="Resources\Images\MinimazeButton.png" />
-    <None Remove="Resources\Images\Pin.png" />
+    <None Remove="Resources\Images\PinDisabled.png" />
     <None Remove="Resources\Images\Refresh.png" />
     <None Remove="Resources\Images\Settings.png" />
     <None Remove="Resources\Images\Success.png" />
@@ -64,7 +64,7 @@
     <Resource Include="Resources\Images\MinimazeButton.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\Pin.png">
+    <Resource Include="Resources\Images\PinDisabled.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Refresh.png">
