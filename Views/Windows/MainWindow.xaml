@@ -19,10 +19,12 @@
             <RowDefinition Height="25"/>
             <RowDefinition Height="475"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="ToolBarGrid" Grid.Row="0" Grid.Column="0" Height="25"  Background="#10316b" >
+        <Grid x:Name="ToolBarGrid" Grid.Row="0" Grid.Column="0" Height="25"  Background="#10316b" MouseDown="ToolBarGrid_OnMouseDown" >
             <TextBlock x:Name="ProgramNameLabel" Text="{Binding Path=Title}" Foreground="#ffffff" FontSize="15" Margin="5 2 0 0"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  >
-                <Button x:Name="PinButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButon}">
+                <Button x:Name="PinButton" Height="15" Width="15" Margin="0 0 5 0"
+                        Style="{StaticResource ToolBarButon}" Command="{Binding PinWindowCommand}"
+                        CommandParameter="{Binding ElementName=Window}">
                     <Image Source="{Binding PinImage}" Height="15" Width="15" Opacity="0.3"/>
                 </Button>
                 <Button x:Name="MinButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButon}" >

@@ -24,5 +24,10 @@ namespace CashalotHelper
         {
             InitializeComponent();
         }
+
+        private void ToolBarGrid_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }

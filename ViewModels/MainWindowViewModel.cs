@@ -1,4 +1,7 @@
-﻿using CashalotHelper.ViewModels.Base;
+﻿using System.Windows;
+using System.Windows.Input;
+using CashalotHelper.Infrastructure.Commands;
+using CashalotHelper.ViewModels.Base;
 
 namespace CashalotHelper.ViewModels;
 
@@ -16,25 +19,44 @@ public class MainWindowViewModel : ViewModel
     }
     #endregion
 
-    #region PinState and PinButton ImageSource
+    #region PinButton ImageSource
 
-    private bool _isPined = false;
-    public bool IsPined
-    {
-        get => _isPined;
-        set => Set(ref _isPined, value);
-    }
 
+    private string _pinImage = "/CashalotHelper;component/Resources/Images/PinDisabled.png";
     public string PinImage
     {
-        get
-        {
-            if (IsPined) return "/CashalotHelper;component/Resources/Images/PinEnabled.png";
-            return "/CashalotHelper;component/Resources/Images/PinDisabled.png";
-        }
+        get => _pinImage;
+        set => Set(ref _pinImage, value);
     }
 
-    #endregion 
+    #endregion
 
+    #region Commands
 
+    #region PinWindowCommand
+
+    public ICommand PinWindowCommand { get; }
+
+    private void OnPinWindowCommandExecuted(object o)
+    {
+        if (((o as Window)!).Topmost)
+        {
+            ((o as Window)!).Topmost = false;
+            PinImage = "/CashalotHelper;component/Resources/Images/PinDisabled.png";
+            return;
+        }
+        ((o as Window)!).Topmost = true;
+        PinImage = "/CashalotHelper;component/Resources/Images/PinEnabled.png";
+    }
+
+    private bool CanPinWindowCommandExecute(object o) => true;
+
+    #endregion
+
+    #endregion
+
+    public MainWindowViewModel()
+    {
+        PinWindowCommand = new RelayCommand(OnPinWindowCommandExecuted, CanPinWindowCommandExecute);
+    }
 }
