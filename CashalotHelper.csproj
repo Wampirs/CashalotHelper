@@ -12,7 +12,11 @@
     <Folder Include="Infrastructure\Commands\Base\" />
     <Folder Include="Models\" />
     <Folder Include="ViewModels\Base\" />
-    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Meziantou.Framework.Win32.RestartManager" Version="1.1.2" />
+    <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
   </ItemGroup>
 
 </Project>
