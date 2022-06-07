@@ -1,0 +1,39 @@
+﻿<Window x:Class="CashalotHelper.Views.Windows.CustomMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CashBackup.Windows"
+        mc:Ignorable="d"
+        Title="MessageBox" Height="200" Width="400" WindowStartupLocation="CenterOwner"  ResizeMode="NoResize" WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="#10316b" BorderThickness="1" Grid.Row="0" Grid.RowSpan="3"/>
+        <Grid x:Name="ToolBarGrid" Height="25"  Background="#10316b" MouseLeftButtonDown="ToolBarGrid_MouseLeftButtonDown" VerticalAlignment="Top" Grid.Row="0">
+            <TextBlock x:Name="TitleBox" Foreground="#ffffff" FontSize="15" Margin="5 2 0 0" TextAlignment="Center" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  >
+                <Button x:Name="CloseButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButon}" Click="CloseButton_Click">
+                    <Image Source="/Resources/Images/CloseButton.png" Height="10" Width="10" Opacity="0.3"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Width="Auto" HorizontalAlignment="Center">
+            <Image x:Name="ImageContainer" Width="100" Height="100"/>
+            <TextBlock Name="MessageContainer" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" FontSize="15" Width="275" MaxWidth="300" TextAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Name="ButtonContainer" Grid.Row="2" Height="50" Width="Auto"  Orientation="Horizontal" HorizontalAlignment="Center" >
+                <StackPanel.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource ButtonPositive}">
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="Width" Value="100"/>
+                        <Setter Property="Foreground" Value="#ffffff"/>
+                        <Setter Property="Margin" Value="5 10 5 10" />
+                    </Style>
+                </StackPanel.Resources>
+            </StackPanel>
+        </Grid>
+</Window>

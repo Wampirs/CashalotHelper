@@ -34,7 +34,7 @@
         <TabControl Grid.Row="1" TabStripPlacement="Left" Width="850" Style="{StaticResource TabControl}" >
             <TabItem x:Name="BackupManagerTab" Width="50" Height="50" Style="{StaticResource TabItem}">
                 <TabItem.Header>
-                    <Image Source="/CashalotHelper;component/Resources/Images/Archive.png" Height="40" Width="40" ToolTip="BackupManager"/>
+                    <Image Source="pack://application:,,,/Resources/Images/Archive.png" Height="40" Width="40" ToolTip="BackupManager"/>
                 </TabItem.Header>
                 <TabItem.Content>
                     <Grid x:Name="BackupTabGrid" Background="#f9f9f8" VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" Height="475">
@@ -63,7 +63,7 @@
                             </ComboBox>
                             <Button x:Name="OpenProgramPath" Height="30" Width="30" HorizontalAlignment="Left" Margin="210 0 0 0" Background="Transparent" BorderBrush="Transparent" Style="{StaticResource OpenFolderBtn}"
                     Command="{Binding OpenProgFolderCmd}" CommandParameter="{Binding SelectedProgram}">
-                                <Image Source="/CashalotHelper;component/Resources/Images/Folder.png" Height="30" Width="30" Margin="-2"/>
+                                <Image Source="/Resources/Images/Folder.png" Height="30" Width="30" Margin="-2"/>
                             </Button>
                             <TextBlock x:Name="FileCountInProgram" HorizontalAlignment="Left" VerticalAlignment="Center" Width="320"  Margin="250 0 0 0" FontSize="15" Foreground="#000000"
                        Text="{Binding StringFormat= Файлів в обраній програмі: {0}, Path=SelectedProgram.FileCount}"  />
