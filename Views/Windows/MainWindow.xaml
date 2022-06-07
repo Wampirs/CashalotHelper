@@ -3,9 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:CashalotHelper.ViewModels"
+        xmlns:cmd ="clr-namespace:CashalotHelper.Infrastructure.Commands"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="850" 
-        ResizeMode="NoResize" WindowStyle="None">
+        Title="{Binding Path=Title}" Height="500" Width="850" 
+        ResizeMode="NoResize" WindowStyle="None"
+        x:Name="Window">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
 
 
     <Grid x:Name="MainWindowGrid">
@@ -14,15 +20,21 @@
             <RowDefinition Height="475"/>
         </Grid.RowDefinitions>
         <Grid x:Name="ToolBarGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Height="25"  Background="#10316b" >
-            <TextBlock x:Name="ProgramNameLabel" Text="Cashalot Backup Manager" Foreground="#ffffff" FontSize="15" Margin="5 2 0 0"/>
+            <TextBlock x:Name="ProgramNameLabel" Text="{Binding Path=Title}" Foreground="#ffffff" FontSize="15" Margin="5 2 0 0"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  >
-                <Button x:Name="PinButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButon}" >
+                <Button x:Name="PinButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButon}">
                     <Image Source="/CashalotHelper;component/Resources/Images/Pin.png" Height="15" Width="15" Opacity="0.3"/>
                 </Button>
                 <Button x:Name="MinButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButon}" >
                     <Image Source="/CashalotHelper;component/Resources/Images/MinimazeButton.png" Height="15" Width="15" Opacity="0.3"/>
                 </Button>
                 <Button x:Name="CloseButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButon}" >
+                    <Button.Command>
+                        <cmd:CloseWindowCommand/>
+                    </Button.Command>
+                    <Button.CommandParameter>
+                        <Binding ElementName="Window"/>
+                    </Button.CommandParameter>
                     <Image Source="/CashalotHelper;component/Resources/Images/CloseButton.png" Height="10" Width="10" Opacity="0.3"/>
                 </Button>
             </StackPanel>
