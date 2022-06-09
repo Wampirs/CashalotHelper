@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -7,6 +6,7 @@ using CashalotHelper.Infrastructure.Commands;
 using CashalotHelper.Models;
 using CashalotHelper.Services;
 using CashalotHelper.ViewModels.Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace CashalotHelper.ViewModels;
 
@@ -116,7 +116,7 @@ public class BackupManagerViewModel : ViewModel
     {
         _db = new DbService();
         _db.Backups.Load();
-        Backups = _db.Backups.Local;
+        Backups = _db.Backups.Local.ToObservableCollection();
         CreateBackupCommand = new RelayCommand(OnCreateBackupCommandExecuted, CanCreateBackupCommandExecute);
         RestoreBackupCommand = new RelayCommand(OnRestoreBackupCommandExecuted, CanRestoreBackupCommandExecute);
     }
