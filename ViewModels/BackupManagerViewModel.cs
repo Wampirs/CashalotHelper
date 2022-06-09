@@ -1,14 +1,19 @@
 ﻿using System.Collections.ObjectModel;
+using System.Data.Entity;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using CashalotHelper.Infrastructure.Commands;
 using CashalotHelper.Models;
+using CashalotHelper.Services;
 using CashalotHelper.ViewModels.Base;
 
 namespace CashalotHelper.ViewModels;
 
 public class BackupManagerViewModel : ViewModel
 {
+    private readonly DbService _db;
+
     #region SelectedBackup
 
     private Backup? _selectedBackup;
@@ -109,6 +114,9 @@ public class BackupManagerViewModel : ViewModel
 
     public BackupManagerViewModel()
     {
+        _db = new DbService();
+        _db.Backups.Load();
+        Backups = _db.Backups.Local;
         CreateBackupCommand = new RelayCommand(OnCreateBackupCommandExecuted, CanCreateBackupCommandExecute);
         RestoreBackupCommand = new RelayCommand(OnRestoreBackupCommandExecuted, CanRestoreBackupCommandExecute);
     }

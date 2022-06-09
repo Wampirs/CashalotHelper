@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <PackageReference Include="Meziantou.Framework.Win32.RestartManager" Version="1.1.2" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.116" />
     <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
   </ItemGroup>
 
