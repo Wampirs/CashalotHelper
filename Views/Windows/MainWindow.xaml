@@ -52,7 +52,7 @@
 
 
         <TabControl Grid.Row="1" TabStripPlacement="Left" Width="850" Style="{StaticResource TabControl}" >
-            <TabItem x:Name="BackupManagerTab" Width="50" Height="50" Style="{StaticResource TabItem}">
+            <TabItem x:Name="BackupManagerTab" Width="50" Height="50" Style="{StaticResource TabItem}" DataContext="{Binding Path=BackupManagerVM}" >
                 <TabItem.Header>
                     <Image Source="pack://application:,,,/Resources/Images/Archive.png" Height="40" Width="40" ToolTip="BackupManager"/>
                 </TabItem.Header>
@@ -66,7 +66,7 @@
 
                         <Grid Grid.Row="0" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Center" Background="#ffffff" Width="780" Height="40">
                             <ComboBox x:Name="ProgramsComboBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Height="30" Margin="5 0 0 0" Style="{StaticResource CmbBox}"
-                      ItemsSource="{Binding Programs}" SelectedItem="{Binding SelectedProgram}" >
+                                        ItemsSource="{Binding Programs}" SelectedItem="{Binding SelectedProgram}" >
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock>
@@ -79,16 +79,15 @@
                                         </TextBlock>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
-
                             </ComboBox>
                             <Button x:Name="OpenProgramPath" Height="30" Width="30" HorizontalAlignment="Left" Margin="210 0 0 0" Background="Transparent" BorderBrush="Transparent" Style="{StaticResource OpenFolderBtn}"
-                    Command="{Binding OpenProgFolderCmd}" CommandParameter="{Binding SelectedProgram}">
+                                    Command="{Binding OpenProgFolderCmd}" CommandParameter="{Binding SelectedProgram}">
                                 <Image Source="/Resources/Images/Folder.png" Height="30" Width="30" Margin="-2"/>
                             </Button>
                             <TextBlock x:Name="FileCountInProgram" HorizontalAlignment="Left" VerticalAlignment="Center" Width="320"  Margin="250 0 0 0" FontSize="15" Foreground="#000000"
-                       Text="{Binding StringFormat= Файлів в обраній програмі: {0}, Path=SelectedProgram.FileCount}"  />
+                                       Text="{Binding StringFormat= Файлів в обраній програмі: {0}, Path=SelectedProgram.FileCount}"  />
                             <Button  x:Name="CreateButton" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Height="30" Margin="5" Style="{StaticResource ButtonPositive}"
-                    Command="{Binding PackBackupCmd}" CommandParameter="{Binding SelectedProgram}">
+                                     Command="{Binding CreateBackupCommand}">
                                 <TextBlock x:Name="CreateButtonText" Text="Создать бекап" FontSize="15" Foreground="#ffffff"/>
                             </Button>
                         </Grid>
@@ -135,7 +134,7 @@
                         </Grid>
                         <Grid Grid.Row="2" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="780" Height="40" Background="#ffffff">
                             <Button x:Name="ToBackupButton" Width="200" Height="30"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Style="{StaticResource ButtonPositive}"
-                    Command="{Binding UnpackBackupCmd}" CommandParameter="{Binding SelectedBackup}">
+                    Command="{Binding RestoreBackupCommand}">
                                 <TextBlock Text="Откатить бекап" FontSize="15" Foreground="#ffffff"/>
                             </Button>
                         </Grid>

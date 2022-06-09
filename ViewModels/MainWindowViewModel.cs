@@ -31,6 +31,10 @@ public class MainWindowViewModel : ViewModel
 
     #endregion
 
+    private BackupManagerViewModel _backupManagerVM = new BackupManagerViewModel();
+
+    public BackupManagerViewModel BackupManagerVM => _backupManagerVM;
+
     #region Commands
 
     #region PinWindowCommand
