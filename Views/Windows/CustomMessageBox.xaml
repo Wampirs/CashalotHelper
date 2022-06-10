@@ -16,7 +16,7 @@
         <Grid x:Name="ToolBarGrid" Height="25"  Background="#10316b" MouseLeftButtonDown="ToolBarGrid_MouseLeftButtonDown" VerticalAlignment="Top" Grid.Row="0">
             <TextBlock x:Name="TitleBox" Foreground="#ffffff" FontSize="15" Margin="5 2 0 0" TextAlignment="Center" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  >
-                <Button x:Name="CloseButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButon}" Click="CloseButton_Click">
+                <Button x:Name="CloseButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButton}" Click="CloseButton_Click">
                     <Image Source="/Resources/Images/CloseButton.png" Height="10" Width="10" Opacity="0.3"/>
                 </Button>
             </StackPanel>

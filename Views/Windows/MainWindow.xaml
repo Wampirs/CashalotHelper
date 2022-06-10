@@ -23,11 +23,11 @@
             <TextBlock x:Name="ProgramNameLabel" Text="{Binding Path=Title}" Foreground="White" FontSize="15" Margin="5 2 0 0"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  >
                 <Button x:Name="PinButton" Height="15" Width="15" Margin="0 0 5 0"
-                        Style="{StaticResource ToolBarButon}" Command="{Binding PinWindowCommand}"
+                        Style="{StaticResource ToolBarButton}" Command="{Binding PinWindowCommand}"
                         CommandParameter="{Binding ElementName=Window}">
                     <Image Source="{Binding PinImage}" Height="15" Width="15" Opacity="0.3"/>
                 </Button>
-                <Button x:Name="MinButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButon}" >
+                <Button x:Name="MinButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButton}" >
                     <Button.Command>
                         <cmd:MinimizeWindowCommand/>
                     </Button.Command>
@@ -36,7 +36,7 @@
                     </Button.CommandParameter>
                     <Image Source="/CashalotHelper;component/Resources/Images/MinimazeButton.png" Height="15" Width="15" Opacity="0.3"/>
                 </Button>
-                <Button x:Name="CloseButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButon}" >
+                <Button x:Name="CloseButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButton}" >
                     <Button.Command>
                         <cmd:CloseWindowCommand/>
                     </Button.Command>

@@ -24,7 +24,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ToolBarButon" TargetType="Button">
+    <Style x:Key="ToolBarButton" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Background" Value="{DynamicResource MainActivePositiveColor}"/>
         <Setter Property="Template">
