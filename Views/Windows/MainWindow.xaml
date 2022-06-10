@@ -20,7 +20,7 @@
             <RowDefinition Height="475"/>
         </Grid.RowDefinitions>
         <Grid x:Name="ToolBarGrid" Grid.Row="0" Grid.Column="0" Height="25"  Background="#10316b" MouseDown="ToolBarGrid_OnMouseDown" >
-            <TextBlock x:Name="ProgramNameLabel" Text="{Binding Path=Title}" Foreground="#ffffff" FontSize="15" Margin="5 2 0 0"/>
+            <TextBlock x:Name="ProgramNameLabel" Text="{Binding Path=Title}" Foreground="White" FontSize="15" Margin="5 2 0 0"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  >
                 <Button x:Name="PinButton" Height="15" Width="15" Margin="0 0 5 0"
                         Style="{StaticResource ToolBarButon}" Command="{Binding PinWindowCommand}"
@@ -57,14 +57,14 @@
                     <Image Source="pack://application:,,,/Resources/Images/Archive.png" Height="40" Width="40" ToolTip="BackupManager"/>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <Grid x:Name="BackupTabGrid" Background="#f9f9f8" VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" Height="475">
+                    <Grid x:Name="BackupTabGrid" VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" Height="475">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="0" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Center" Background="#ffffff" Width="780" Height="40">
+                        <Grid Grid.Row="0" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Center" Background="{StaticResource ElementBackgroundColor}" Width="780" Height="40">
                             <ComboBox x:Name="ProgramsComboBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Height="30" Margin="5 0 0 0" Style="{StaticResource CmbBox}"
                                         ItemsSource="{Binding Programs}" SelectedItem="{Binding SelectedProgram}" >
                                 <ComboBox.ItemTemplate>
@@ -88,18 +88,18 @@
                                        Text="{Binding StringFormat= Файлів в обраній програмі: {0}, Path=SelectedProgram.FileCount}"  />
                             <Button  x:Name="CreateButton" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Height="30" Margin="5" Style="{StaticResource ButtonPositive}"
                                      Command="{Binding CreateBackupCommand}">
-                                <TextBlock x:Name="CreateButtonText" Text="Создать бекап" FontSize="15" Foreground="#ffffff"/>
+                                <TextBlock x:Name="CreateButtonText" Text="Создать бекап" FontSize="15" Foreground="White"/>
                             </Button>
                         </Grid>
-                        <Grid Grid.Row="1" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#ffffff" Width="780" Height="365" >
+                        <Grid Grid.Row="1" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Top" Background="{StaticResource ElementBackgroundColor}" Width="780" Height="365" >
                             <DataGrid x:Name="BackupsGrid" HorizontalAlignment="Center" VerticalAlignment="Top"
-                      Background="#ffffff" Margin="5" ColumnWidth="*" RowHeight="25" BorderBrush="White"
-                      ItemsSource="{Binding Backups}" SelectedItem="{Binding SelectedBackup}" 
-                      GridLinesVisibility="None" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False">
+                                 Margin="5" ColumnWidth="*" RowHeight="25" BorderBrush="White"
+                                 ItemsSource="{Binding Backups}" SelectedItem="{Binding SelectedBackup}" 
+                                 GridLinesVisibility="None" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False">
                                 <DataGrid.ColumnHeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="Background" Value="#ffffff"/>
+                                        <Setter Property="Background" Value="White"/>
                                         <Setter Property="Padding" Value="5 0 0 5"/>
                                         <Setter Property="FontSize" Value="15"/>
                                     </Style>
@@ -134,8 +134,8 @@
                         </Grid>
                         <Grid Grid.Row="2" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="780" Height="40" Background="#ffffff">
                             <Button x:Name="ToBackupButton" Width="200" Height="30"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Style="{StaticResource ButtonPositive}"
-                    Command="{Binding RestoreBackupCommand}">
-                                <TextBlock Text="Откатить бекап" FontSize="15" Foreground="#ffffff"/>
+                                    Command="{Binding RestoreBackupCommand}">
+                                <TextBlock Text="Откатить бекап" FontSize="15" Foreground="White"/>
                             </Button>
                         </Grid>
                     </Grid>
@@ -146,7 +146,7 @@
                     <Image Source="/CashalotHelper;component/Resources/Images/Branch.png" Width="40" Height="40" ToolTip="BranchManager"/>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <Grid Background="#f9f9f8">
+                    <Grid >
                         <!--<Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="*"/>

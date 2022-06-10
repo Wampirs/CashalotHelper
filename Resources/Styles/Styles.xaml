@@ -1,21 +1,22 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
     <Style x:Key="ButtonPositive" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Background" Value="#10316b"/>
+        <Setter Property="Background" Value="{DynamicResource MainActivePositiveColor}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Name="ButtonBorder" BorderThickness="0" BorderBrush="Transparent" Background="{TemplateBinding Background}">
+                    <Border Name="ButtonBorder" BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#082a64"/>
+                            <Setter Property="Background" Value="{DynamicResource MainMouseOverColor}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="#465366"/>
+                            <Setter Property="Background" Value="{DynamicResource MainInactiveColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -25,16 +26,16 @@
 
     <Style x:Key="ToolBarButon" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Background" Value="#10316b"/>
+        <Setter Property="Background" Value="{DynamicResource MainActivePositiveColor}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Name="ButtonBorder" BorderThickness="0" BorderBrush="Transparent" Background="{TemplateBinding Background}">
+                    <Border Name="ButtonBorder" BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#FF082A64"/>
+                            <Setter Property="Background" Value="{DynamicResource MainMouseOverColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -44,17 +45,17 @@
 
     <Style x:Key="OpenFolderBtn" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Background" Value="{DynamicResource Transparent}"/>
         <Setter Property="Opacity" Value="0.4"/>
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border BorderThickness="0" BorderBrush="Transparent" Background="{TemplateBinding Background}">
+                    <Border BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Cursor" Value="Hand"/>
                             <Setter Property="Opacity" Value="1"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -73,7 +74,7 @@
                 x:Name="Border" 
                 Grid.ColumnSpan="2"
                 CornerRadius="1"
-                Background="#ffffff"
+                Background="White"
                 BorderBrush="Gray"
                 BorderThickness="0.6" />
             <Path 
@@ -110,7 +111,6 @@
                         <ToggleButton 
                             Name="ToggleButton" 
                             Template="{StaticResource ComboBoxToggleButton}" 
-                            Grid.Column="2" 
                             Focusable="false"
                             IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
                             ClickMode="Press">
@@ -131,7 +131,7 @@
                             VerticalAlignment="Center" 
                             Margin="3,3,23,3"
                             Focusable="True" 
-                            Background="#ffffff"
+                            Background="White"
                             Visibility="Hidden"
                             IsReadOnly="{TemplateBinding IsReadOnly}"/>
                         <Popup 
@@ -148,15 +148,13 @@
                                 MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                 <Border 
                                     x:Name="DropDownBorder"
-                                    Background="#ffffff"
+                                    Background="White"
                                     BorderThickness="0.6"
                                     BorderBrush="Black"/>
                                 <ScrollViewer Margin="0 0 0 0" SnapsToDevicePixels="True">
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                                 </ScrollViewer>
-
                             </Grid>
-                            
                         </Popup>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -174,7 +172,7 @@
     <Style x:Key="TabControl" TargetType="{x:Type TabControl}">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="Background" Value="#f9f9f8"/>
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundColor}"/>
     </Style>
 
     <Style x:Key="TabItem" TargetType="{x:Type TabItem}">
@@ -185,7 +183,7 @@
                     <Grid>
                         <Border 
                                  Name="Border"
-                                 Background="#ffffff"
+                                 Background="{DynamicResource ElementBackgroundColor}"
                                  Opacity="0.5"
                                  BorderBrush="Black" 
                                  BorderThickness="0" 
@@ -203,7 +201,7 @@
                             <Setter Property="Opacity" TargetName="Border" Value="0.7" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True" >
-                            <Setter Property="Background" TargetName="Border" Value="#f9f9f8" />
+                            <Setter Property="Background" TargetName="Border" Value="{DynamicResource WindowBackgroundColor}" />
                             <Setter Property="Opacity" TargetName="Border" Value="1"/>
                             <Setter Property="CornerRadius" TargetName="Border" Value="3,0,0,3"/>
                             <Setter Property="BorderThickness" TargetName="Border" Value="0,0.5,0,0.5"/>
