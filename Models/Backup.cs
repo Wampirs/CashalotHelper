@@ -5,12 +5,11 @@ using System.Runtime.CompilerServices;
 
 namespace CashalotHelper.Models
 {
-    [DefaultValue(null)]
-    [Serializable]
     public class Backup : INotifyPropertyChanged
     {
         #region Fields
-        private long id = -1;
+
+        private long id;
         private string name = String.Empty;
         private string path = String.Empty;
         private string createDate = " 00:00 00.00.00";
@@ -115,13 +114,7 @@ namespace CashalotHelper.Models
         #endregion
 
         #region Constructors
-        //Конструктор для сериализации. НЕ ТРОГАТЬ!
-        public Backup()
-        {
-
-        }
-        //TODO: создать диалоговое окно для запроса имени для бекапа у пользователя(Name). Так же сделать запрос на сохранение базы в файл бекапа(IncludeBase)
-        public Backup(Program prog)
+        public Backup(Cashalot prog)
         {
             Id = DateTime.Now.Ticks;
             Name = prog.Name;
