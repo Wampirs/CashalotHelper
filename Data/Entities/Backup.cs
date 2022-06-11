@@ -3,7 +3,7 @@ using CashalotHelper.Data.Entities.Base;
 
 namespace CashalotHelper.Data.Entities
 {
-    internal class Backup : Entity
+    public class Backup : Entity
     {
         public string Name { get; set; }
         public string Path { get; set; }

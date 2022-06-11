@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CashalotHelper.Data.Interfaces;
 
 namespace CashalotHelper.Data.Entities.Base
 {
-    public abstract class Entity
+    public abstract class Entity : IEntity
     {
         public Guid Id { get; set; }
     }
