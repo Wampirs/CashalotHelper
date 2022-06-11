@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Infrastructure\Commands\Base\" />
     <Folder Include="ViewModels\Base\" />
   </ItemGroup>
