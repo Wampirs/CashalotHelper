@@ -19,7 +19,7 @@ namespace CashalotHelper.Migrations
                     CreateDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Version = table.Column<string>(type: "TEXT", nullable: false),
                     FileCount = table.Column<int>(type: "INTEGER", nullable: false),
-                    Vote = table.Column<string>(type: "TEXT", nullable: false)
+                    Note = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

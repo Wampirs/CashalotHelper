@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CashalotHelper.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -19,9 +20,20 @@ namespace CashalotHelper.Data
             _logger = logger;
         }
 
-        public void Initialize()
+        public async Task InitializeAsync()
         {
-            _db.Database.Migrate();
+            await _db.Database.MigrateAsync().ConfigureAwait(false);
+
+            await _db.Backups.AddAsync(new Backup()
+            {
+                Note = "Some Note",
+                Name = "Some Name",
+                CreateDate = DateTime.Now,
+                FileCount = 12,
+                Path = "Some Path",
+                Version = "Some Version"
+            });
+            await _db.SaveChangesAsync();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace CashalotHelper
             using (var scope = Services.CreateScope())
             {
                 scope.ServiceProvider.GetRequiredService<FileSystemInitializer>().Initialize();
-                scope.ServiceProvider.GetRequiredService<DbInitializer>().Initialize();
+                scope.ServiceProvider.GetRequiredService<DbInitializer>().InitializeAsync().Wait();
             }
             base.OnStartup(e);
             await host.StartAsync();

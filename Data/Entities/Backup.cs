@@ -10,6 +10,6 @@ namespace CashalotHelper.Data.Entities
         public DateTime CreateDate { get; set; }
         public string Version { get; set; }
         public int FileCount { get; set; }
-        public string Vote { get; set; }
+        public string Note { get; set; }
     }
 }
