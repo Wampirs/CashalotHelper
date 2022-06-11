@@ -8,10 +8,8 @@
         mc:Ignorable="d"
         Title="{Binding Path=Title}" Height="500" Width="850" 
         ResizeMode="NoResize" WindowStyle="None"
-        x:Name="Window">
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
+        x:Name="Window"
+        DataContext="{Binding Path=MainWindowViewModel ,Source={StaticResource Locator}}">
 
 
     <Grid x:Name="MainWindowGrid">

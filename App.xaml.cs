@@ -7,6 +7,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using CashalotHelper.Services;
+using CashalotHelper.ViewModels;
 
 namespace CashalotHelper
 {
@@ -18,10 +20,11 @@ namespace CashalotHelper
         private static IHost _host;
         public static IHost Host => _host ??=Program.CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
         public static IServiceProvider Services => Host.Services;
-        internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
-        {
-           
-        }
+
+        internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
+            .AddServices()
+            .AddViewModels()
+        ;
 
         protected override async void OnStartup(StartupEventArgs e)
         {
