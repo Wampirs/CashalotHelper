@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using CashalotHelper.Data;
+using CashalotHelper.FileSystem;
 using CashalotHelper.Services;
 using CashalotHelper.ViewModels;
 
@@ -23,6 +24,7 @@ namespace CashalotHelper
         public static IServiceProvider Services => Host.Services;
 
         internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
+            .AddFileSystem()
             .AddDatabase(host.Configuration.GetSection("Database"))
             .AddServices()
             .AddViewModels()
@@ -32,9 +34,10 @@ namespace CashalotHelper
         {
             var host = Host;
 
-            using (var Scope = Services.CreateScope())
+            using (var scope = Services.CreateScope())
             {
-                Scope.ServiceProvider.GetRequiredService<DbInitializer>().Initialize();
+                scope.ServiceProvider.GetRequiredService<FileSystemInitializer>().Initialize();
+                scope.ServiceProvider.GetRequiredService<DbInitializer>().Initialize();
             }
             base.OnStartup(e);
             await host.StartAsync();

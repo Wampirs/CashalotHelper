@@ -15,9 +15,7 @@ namespace CashalotHelper.Data
             services
                 .AddDbContext<HelperDb>(opt =>
                     {
-                        var DbPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                                     "\\BackupManager\\CashalotHelper.db";
-                        opt.UseSqlite($"Data Source={DbPath}");
+                        opt.UseSqlite($"Data Source={FileSystem.FileSystem.MainDirectory}\\CashalotHelper.db");
                     }
                 )
                 .AddTransient<DbInitializer>()
