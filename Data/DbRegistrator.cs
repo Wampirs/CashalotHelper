@@ -19,6 +19,7 @@ namespace CashalotHelper.Data
                     }
                 )
                 .AddTransient<DbInitializer>()
+                .AddRepositories()
             ;
     }
 }

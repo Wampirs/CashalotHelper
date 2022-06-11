@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using CashalotHelper.Data.Entities;
+using CashalotHelper.Data.Interfaces;
 using CashalotHelper.Infrastructure.Commands;
 using CashalotHelper.ViewModels.Base;
 
@@ -39,7 +41,8 @@ public class MainWindowViewModel : ViewModel
 
     #region PinWindowCommand
 
-    public ICommand PinWindowCommand { get; }
+    private ICommand _pinWindowCommand;
+    public ICommand PinWindowCommand => _pinWindowCommand ??= new RelayCommand(OnPinWindowCommandExecuted, CanPinWindowCommandExecute);
 
     private void OnPinWindowCommandExecuted(object o)
     {
@@ -59,8 +62,8 @@ public class MainWindowViewModel : ViewModel
 
     #endregion
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(IRepository<Backup> BackupRepository)
     {
-        PinWindowCommand = new RelayCommand(OnPinWindowCommandExecuted, CanPinWindowCommandExecute);
+        
     }
 }

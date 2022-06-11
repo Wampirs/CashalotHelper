@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CashalotHelper.Data.Entities.Base;
+using CashalotHelper.Data.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CashalotHelper.Data.Entities.Base;
-using CashalotHelper.Data.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace CashalotHelper.Data
 {
