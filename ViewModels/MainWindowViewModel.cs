@@ -9,6 +9,8 @@ namespace CashalotHelper.ViewModels;
 
 public class MainWindowViewModel : ViewModel
 {
+    private readonly IRepository<Backup> _backupRepository;
+
     #region Title
     private string _title = "Cashalot Test Helper";
     /// <summary>
@@ -33,15 +35,15 @@ public class MainWindowViewModel : ViewModel
 
     #endregion
 
-    private BackupManagerViewModel _backupManagerVM = new BackupManagerViewModel();
+    //private BackupManagerViewModel _backupManagerVM = new BackupManagerViewModel();
 
-    public BackupManagerViewModel BackupManagerVM => _backupManagerVM;
+    //public BackupManagerViewModel BackupManagerVM => _backupManagerVM;
 
     #region Commands
 
     #region PinWindowCommand
 
-    private ICommand _pinWindowCommand;
+    private ICommand _pinWindowCommand = null;
     public ICommand PinWindowCommand => _pinWindowCommand ??= new RelayCommand(OnPinWindowCommandExecuted, CanPinWindowCommandExecute);
 
     private void OnPinWindowCommandExecuted(object o)
@@ -64,6 +66,6 @@ public class MainWindowViewModel : ViewModel
 
     public MainWindowViewModel(IRepository<Backup> BackupRepository)
     {
-        
+        _backupRepository = BackupRepository;
     }
 }

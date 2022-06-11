@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CashalotHelper.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CashalotHelper.Services
@@ -10,6 +6,7 @@ namespace CashalotHelper.Services
     public static class ServiceRegistrator
     {
         public static IServiceCollection AddServices(this IServiceCollection services) => services
+            .AddTransient<IArchivatorService,ArchivatorService>()
         ;
     }
 }
