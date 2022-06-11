@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using CashalotHelper.Data;
 using CashalotHelper.Services;
 using CashalotHelper.ViewModels;
 
@@ -22,6 +23,7 @@ namespace CashalotHelper
         public static IServiceProvider Services => Host.Services;
 
         internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
+            .AddDatabase(host.Configuration.GetSection("Database"))
             .AddServices()
             .AddViewModels()
         ;
@@ -29,6 +31,11 @@ namespace CashalotHelper
         protected override async void OnStartup(StartupEventArgs e)
         {
             var host = Host;
+
+            using (var Scope = Services.CreateScope())
+            {
+                Scope.ServiceProvider.GetRequiredService<DbInitializer>().Initialize();
+            }
             base.OnStartup(e);
             await host.StartAsync();
         }
