@@ -35,15 +35,19 @@ public class MainWindowViewModel : ViewModel
 
     #endregion
 
-    //private BackupManagerViewModel _backupManagerVM = new BackupManagerViewModel();
+    #region ChildViewModels
 
-    //public BackupManagerViewModel BackupManagerVM => _backupManagerVM;
+    private ViewModel _backupManagerVM;
+
+    public ViewModel BackupManagerVM => new BackupManagerViewModel(_backupRepository);
+
+    #endregion
 
     #region Commands
 
     #region PinWindowCommand
 
-    private ICommand _pinWindowCommand = null;
+    private ICommand _pinWindowCommand;
     public ICommand PinWindowCommand => _pinWindowCommand ??= new RelayCommand(OnPinWindowCommandExecuted, CanPinWindowCommandExecute);
 
     private void OnPinWindowCommandExecuted(object o)

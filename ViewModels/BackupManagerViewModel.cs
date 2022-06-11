@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using CashalotHelper.Data.Interfaces;
 using CashalotHelper.Infrastructure.Commands;
 using CashalotHelper.Models;
 using CashalotHelper.Services;
@@ -57,11 +58,11 @@ public class BackupManagerViewModel : ViewModel
 
     #region Backups
 
-    private ObservableCollection<Backup> _backups = null!;
+    private ObservableCollection<Data.Entities.Backup> _backups;
     /// <summary>
     /// Колекція наявних бекапів
     /// </summary>
-    public ObservableCollection<Backup> Backups
+    public ObservableCollection<Data.Entities.Backup> Backups
     {
         get => _backups;
         private set => Set(ref _backups, value);
@@ -72,10 +73,15 @@ public class BackupManagerViewModel : ViewModel
     #region Commands
 
     #region CreateBackupCommand
+
     /// <summary>
     /// Створює новий бекап на основі обраної програми
     /// </summary>
-    public ICommand CreateBackupCommand { get; }
+
+    private ICommand _createBackupCommand;
+
+    public ICommand CreateBackupCommand => _createBackupCommand ??=
+        new RelayCommand(OnCreateBackupCommandExecuted, CanCreateBackupCommandExecute);
 
     private void OnCreateBackupCommandExecuted(object o)
     {
@@ -91,10 +97,14 @@ public class BackupManagerViewModel : ViewModel
     #endregion
 
     #region RestoreBackupCommand
+
     /// <summary>
     /// Відновлює обрану програму до стану обраного бекапу
     /// </summary>
-    public ICommand RestoreBackupCommand { get; }
+
+    private ICommand _restoreBackupCommand;
+    public ICommand RestoreBackupCommand => _restoreBackupCommand ??= 
+        new RelayCommand(OnRestoreBackupCommandExecuted, CanRestoreBackupCommandExecute);
     private void OnRestoreBackupCommandExecuted(object o)
     {
         MessageBox.Show("RestoreBackup");
@@ -111,10 +121,9 @@ public class BackupManagerViewModel : ViewModel
     #endregion
 
 
-    public BackupManagerViewModel()
+    public BackupManagerViewModel(IRepository<Data.Entities.Backup> backups )
     {
-        CreateBackupCommand = new RelayCommand(OnCreateBackupCommandExecuted, CanCreateBackupCommandExecute);
-        RestoreBackupCommand = new RelayCommand(OnRestoreBackupCommandExecuted, CanRestoreBackupCommandExecute);
+        
     }
 
 
