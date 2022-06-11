@@ -12,7 +12,6 @@ namespace CashalotHelper.ViewModels;
 
 public class BackupManagerViewModel : ViewModel
 {
-    private readonly DbService _db;
 
     #region SelectedBackup
 
@@ -30,11 +29,11 @@ public class BackupManagerViewModel : ViewModel
 
     #region SelectedProgram
 
-    private Program? _selectedProgram;
+    private Cashalot? _selectedProgram;
     /// <summary>
     /// Вибрана програма зі списку встановлених
     /// </summary>
-    public Program? SelectedProgram
+    public Cashalot? SelectedProgram
     {
         get => _selectedProgram;
         set => Set(ref _selectedProgram, value);
@@ -44,11 +43,11 @@ public class BackupManagerViewModel : ViewModel
 
     #region Programs
 
-    private ObservableCollection<Program> _programs = null!;
+    private ObservableCollection<Cashalot> _programs = null!;
     /// <summary>
     /// Колекція встановлених програм 
     /// </summary>
-    public ObservableCollection<Program> Programs
+    public ObservableCollection<Cashalot> Programs
     {
         get => _programs;
         private set => Set(ref _programs, value);
@@ -114,9 +113,6 @@ public class BackupManagerViewModel : ViewModel
 
     public BackupManagerViewModel()
     {
-        _db = new DbService();
-        _db.Backups.Load();
-        Backups = _db.Backups.Local.ToObservableCollection();
         CreateBackupCommand = new RelayCommand(OnCreateBackupCommandExecuted, CanCreateBackupCommandExecute);
         RestoreBackupCommand = new RelayCommand(OnRestoreBackupCommandExecuted, CanRestoreBackupCommandExecute);
     }

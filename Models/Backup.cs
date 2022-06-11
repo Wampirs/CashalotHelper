@@ -121,7 +121,7 @@ namespace CashalotHelper.Models
 
         }
         //TODO: создать диалоговое окно для запроса имени для бекапа у пользователя(Name). Так же сделать запрос на сохранение базы в файл бекапа(IncludeBase)
-        public Backup(Program prog)
+        public Backup(Cashalot prog)
         {
             Id = DateTime.Now.Ticks;
             Name = prog.Name;

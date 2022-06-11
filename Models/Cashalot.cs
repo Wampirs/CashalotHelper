@@ -5,7 +5,7 @@ using CashalotHelper.Services;
 
 namespace CashalotHelper.Models
 {
-    public class Program : INotifyPropertyChanged
+    public class Cashalot : INotifyPropertyChanged
     {
         #region Fields
         private string name;
@@ -70,7 +70,7 @@ namespace CashalotHelper.Models
         #endregion
 
         #region Constructors
-        public Program(string _name, string _path, bool _forAllUsers)
+        public Cashalot(string _name, string _path, bool _forAllUsers)
         {
             FolderPath = _path;
             Name = _name;
@@ -79,7 +79,7 @@ namespace CashalotHelper.Models
             PathToExe = FolderPath+"\\Cashalot.exe";
             Version = FSControler.GetFileVersion(pathToExe);
         }
-        public Program(Program prog)
+        public Cashalot(Cashalot prog)
         {
             FolderPath = prog.FolderPath;
             Name = prog.Name;

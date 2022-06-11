@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <StartupObject>CashalotHelper.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,13 +29,13 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Infrastructure\Commands\Base\" />
-    <Folder Include="Models\" />
     <Folder Include="ViewModels\Base\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Meziantou.Framework.Win32.RestartManager" Version="1.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
   </ItemGroup>
 
@@ -84,6 +85,13 @@
     <Resource Include="Resources\Images\Warning.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>
