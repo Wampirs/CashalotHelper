@@ -13,6 +13,7 @@ namespace CashalotHelper.Data
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services) => services
             .AddTransient<IRepository<Backup>,DbRepository<Backup>>()
+            .AddTransient<IRepository<Configuration>,DbRepository<Configuration>>()
         ;
     }
 }
