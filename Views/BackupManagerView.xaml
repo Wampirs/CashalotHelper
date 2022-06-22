@@ -57,20 +57,18 @@
                     <DataGridTextColumn Header="Назва" IsReadOnly="True" CanUserSort="True" 
                                         Binding="{Binding Path=Name}" Width="75" FontSize="15"/>
                     <DataGridTextColumn Header="Версія" IsReadOnly="True" CanUserSort="True"
-                                        Binding="{Binding Path=ProgramVer}" Width="50" FontSize="15"/>
+                                        Binding="{Binding Path=Version}" Width="50" FontSize="15"/>
                     <DataGridTextColumn Header="Дата створення" IsReadOnly="True" CanUserSort="True"
                                         Binding="{Binding Path=CreateDate}" Width="125" FontSize="15"/>
                     <DataGridTextColumn Header="Кількість файлів" IsReadOnly="True" CanUserSort="True"
                                         Binding="{Binding Path=FileCount}" Width="125" FontSize="15"/>
-                    <DataGridCheckBoxColumn Header="База" IsReadOnly="True" CanUserSort="True"
-                                            Binding="{Binding Path=IncludeBase}" Width="40"/>
                     <DataGridTextColumn Header="Примітка" IsReadOnly="False" 
                                         Binding="{Binding Path=Note}" FontSize="15"/>
                     <DataGridTemplateColumn Width="30">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button x:Name="DelButton" Height="20" Width="20" Style="{StaticResource OpenFolderBtn}" 
-                                        Command="{Binding ElementName=BackupsGrid, Path=DataContext.DelBackupCmd}" CommandParameter="{Binding ElementName=BackupsGrid, Path=DataContext.SelectedBackup}">
+                                        Command="{Binding ElementName=BackupsGrid, Path=DataContext.DeleteBackupCommand}" CommandParameter="{Binding ElementName=BackupsGrid, Path=DataContext.SelectedBackup}">
                                     <Image Source="/CashalotHelper;component/Resources/Images/Delete.png" />
                                 </Button>
                             </DataTemplate>

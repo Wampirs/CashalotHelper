@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using CashalotHelper.Data.Entities;
 using CashalotHelper.Data.Interfaces;
 using CashalotHelper.Infrastructure.Commands;
 using CashalotHelper.Models;
@@ -13,14 +14,15 @@ namespace CashalotHelper.ViewModels;
 
 public class BackupManagerViewModel : ViewModel
 {
+    private readonly IRepository<Data.Entities.Backup> backupsRepository;
 
     #region SelectedBackup
 
-    private Backup? _selectedBackup;
+    private Data.Entities.Backup? _selectedBackup;
     /// <summary>
     /// Вибраний бекап зі списку бекапів 
     /// </summary>
-    public Backup? SelectedBackup 
+    public Data.Entities.Backup? SelectedBackup 
     { 
         get => _selectedBackup;
         set => Set(ref _selectedBackup, value);
@@ -42,7 +44,7 @@ public class BackupManagerViewModel : ViewModel
 
     #endregion
 
-    #region Programs
+    #region ProgramsViewCollection
 
     private ObservableCollection<Cashalot> _programs = null!;
     /// <summary>
@@ -56,7 +58,7 @@ public class BackupManagerViewModel : ViewModel
 
     #endregion
 
-    #region Backups
+    #region BackupsViewCollection
 
     private ObservableCollection<Data.Entities.Backup> _backups;
     /// <summary>
@@ -118,12 +120,29 @@ public class BackupManagerViewModel : ViewModel
 
     #endregion
 
+    #region DeleteBackupCommand
+
+    private ICommand deleteBackupCommand;
+
+
+    public ICommand DeleteBackupCommand => deleteBackupCommand ??=
+        new RelayCommand(OnDeleteBackupCommandExecuted, CanDeleteBackupCommandExecute);
+    private void OnDeleteBackupCommandExecuted(object o)
+    {
+        backupsRepository.Remove(SelectedBackup.Id);
+        Backups.Remove(SelectedBackup);
+    }
+    private bool CanDeleteBackupCommandExecute(object o) => SelectedBackup!=null;
+
+    #endregion
+
     #endregion
 
 
     public BackupManagerViewModel(IRepository<Data.Entities.Backup> backups )
     {
-        
+        backupsRepository = backups;
+        Backups = new ObservableCollection<Data.Entities.Backup>(backupsRepository.Items);
     }
 
 
