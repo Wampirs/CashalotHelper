@@ -49,7 +49,6 @@ namespace CashalotHelper.Data
         public T Update(T item)
         {
             if (item == null) throw new ArgumentNullException(nameof(item));
-            if (item == null) throw new ArgumentNullException(nameof(item));
             _db.Entry(item).State = EntityState.Modified;
             if (AutoSave) _db.SaveChanges();
             return item;

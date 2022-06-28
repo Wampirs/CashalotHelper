@@ -104,7 +104,8 @@
                 </TabItem.Header>
                 <TabItem.Content>
                     <Grid x:Name="SettingsGrid" Width="800">
-                        <!--<StackPanel  Orientation="Vertical" Margin="5" >
+
+                        <StackPanel  Orientation="Vertical" Margin="5" >
                             <TextBlock Text="Налаштування" FontSize="30" Height="50" Margin="5" Background="#ffffff"/>
                             <Label BorderBrush="#53A0FF" BorderThickness="2" Height="2" Opacity="0.6" />
                             <StackPanel x:Name="RemoteBranchFolderSettings" Orientation="Horizontal" Background="#ffffff" Margin="5">
@@ -127,7 +128,7 @@
                                 <TextBox x:Name="BackupFolderPath" Margin="10" Height="30" Width="450" Text="{Binding Mode=OneWay, Path=LocalBackupFolderPath}"
                                          FontSize="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True"/>
                             </StackPanel>
-                        </StackPanel>-->
+                        </StackPanel>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
