@@ -7,6 +7,7 @@ namespace CashalotHelper.Services
     {
         public static IServiceCollection AddServices(this IServiceCollection services) => services
             .AddTransient<IArchivatorService,ArchivatorService>()
+            .AddTransient<Settings>()
         ;
     }
 }

@@ -1,11 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using CashalotHelper.Data;
 using CashalotHelper.FileSystem;
@@ -19,8 +15,10 @@ namespace CashalotHelper
     /// </summary>
     public partial class App : Application
     {
+        private static Settings _settings; 
         private static IHost _host;
         public static IHost Host => _host ??=Program.CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
+        public static Settings Settings => _settings ??= Services.CreateScope().ServiceProvider.GetRequiredService<Settings>();
         public static IServiceProvider Services => Host.Services;
 
         internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services

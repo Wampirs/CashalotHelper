@@ -29,23 +29,37 @@ namespace CashalotHelper.Data
 
         public async Task<Configuration> GetAsync(string paramName, CancellationToken cancel = default)
         {
-            return await Configs.SingleOrDefaultAsync(x => x.Property == paramName).ConfigureAwait(false);
+            return await Configs.SingleOrDefaultAsync(x => x.Property == paramName,cancel).ConfigureAwait(false);
         }
 
-        public Configuration UpdateOrCreate(string paramName)
+        public Configuration UpdateOrCreate(Configuration conf)
         {
-            Configuration config = Get(paramName);
-            _db.Entry(config).State = EntityState.Modified;
+            Configuration config = Get(conf.Property);
+            if (config == null)
+            {
+                _db.Entry(conf).State = EntityState.Added;
+            }
+            else
+            {
+                _db.Entry(conf).State = EntityState.Modified;
+            }
             _db.SaveChanges();
-            return config;
+            return config??conf;
         }
 
-        public async Task<Configuration> UpdateOrCreateAsync(string paramName, CancellationToken cancel = default)
+        public async Task<Configuration> UpdateOrCreateAsync(Configuration conf, CancellationToken cancel = default)
         {
-            Configuration config = await GetAsync(paramName);
-            _db.Entry(config).State = EntityState.Modified;
+            Configuration config = await GetAsync(conf.Property);
+            if (config == null)
+            {
+                _db.Entry(conf).State = EntityState.Added;
+            }
+            else
+            {
+                _db.Entry(conf).State = EntityState.Modified;
+            }
             await _db.SaveChangesAsync().ConfigureAwait(false);
-            return config;
+            return config??conf;
         }
     }
 }
