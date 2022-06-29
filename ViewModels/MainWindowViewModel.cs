@@ -38,8 +38,9 @@ public class MainWindowViewModel : ViewModel
     #region ChildViewModels
 
     private ViewModel _backupManagerVM;
-
-    public ViewModel BackupManagerVM => new BackupManagerViewModel(_backupRepository);
+    private ViewModel _settingsVM;
+    public ViewModel BackupManagerVM =>_backupManagerVM??= new BackupManagerViewModel(_backupRepository);
+    public ViewModel SettingsVM => _settingsVM ??= new SettingsViewModel();
 
     #endregion
 

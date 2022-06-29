@@ -103,33 +103,7 @@
                     <Image Source="/CashalotHelper;component/Resources/Images/Settings.png" Width="40" Height="40" ToolTip="Settings"/>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <Grid x:Name="SettingsGrid" Width="800">
-
-                        <StackPanel  Orientation="Vertical" Margin="5" >
-                            <TextBlock Text="Налаштування" FontSize="30" Height="50" Margin="5" Background="#ffffff"/>
-                            <Label BorderBrush="#53A0FF" BorderThickness="2" Height="2" Opacity="0.6" />
-                            <StackPanel x:Name="RemoteBranchFolderSettings" Orientation="Horizontal" Background="#ffffff" Margin="5">
-                                <TextBlock Text="Шлях до папки з збірками бранчів" Width="275" FontSize="15" Margin="15"/>
-                                <TextBox x:Name="PathToRemoteBranches" Margin="10" Width="450" Text="{Binding Path=RemoteBranchFolderPath}"
-                                         FontSize="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel x:Name="TestFilesFolderSettings" Orientation="Horizontal" Background="#ffffff" Margin="5">
-                                <TextBlock Text="Шлях до папки з тестовими файлами" Width="275" FontSize="15" Margin="15"/>
-                                <TextBox x:Name="PathToTestFiles" Margin="10" Width="450" Text="{Binding Path=RemoteTestFilesFolderPath}"
-                                         FontSize="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel x:Name="BranchFolderSettings" Orientation="Horizontal" Background="#ffffff" Margin="5">
-                                <TextBlock Text="Шлях до локального сховища бранчів" Width="275" FontSize="15" Margin="15"/>
-                                <TextBox x:Name="PathToBranchFolder" Margin="10" Width="450" Text="{Binding Mode=OneWay,Path=LocalBranchFolderPath}"
-                                         FontSize="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True"/>
-                            </StackPanel>
-                            <StackPanel x:Name="BackupStorageFolderSettings" Orientation="Horizontal" Background="#ffffff" Margin="5">
-                                <TextBlock Text="Шлях до локального сховища бекапів" Width="275" FontSize="15" Margin="15"/>
-                                <TextBox x:Name="BackupFolderPath" Margin="10" Height="30" Width="450" Text="{Binding Mode=OneWay, Path=LocalBackupFolderPath}"
-                                         FontSize="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Grid>
+                    <ContentControl Content="{Binding SettingsVM}" />
                 </TabItem.Content>
             </TabItem>
         </TabControl>

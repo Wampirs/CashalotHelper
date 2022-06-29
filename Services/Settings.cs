@@ -21,21 +21,21 @@ namespace CashalotHelper.Services
                 SaveChangesToDb(_pathToMasterBranch);
             }
         }
-        public Configuration PathToBranchesFolder 
+        public string PathToBranchesFolder 
         { 
-            get => _pathToBranchesFolder;
+            get => _pathToBranchesFolder.Value;
             set
             {
-                _pathToBranchesFolder = value;
+                _pathToBranchesFolder.Value = value;
                  SaveChangesToDb(_pathToBranchesFolder);
             } 
         }
-        public Configuration PathToNonReleaseFiles 
+        public string PathToNonReleaseFiles 
         {
-            get => _pathToNonReleaseFiles;
+            get => _pathToNonReleaseFiles.Value;
             set
             {
-                _pathToNonReleaseFiles = value;
+                _pathToNonReleaseFiles.Value = value;
                 SaveChangesToDb(_pathToNonReleaseFiles);
             }
         }
