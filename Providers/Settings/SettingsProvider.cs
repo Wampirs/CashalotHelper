@@ -1,11 +1,9 @@
 ﻿using CashalotHelper.Data.Entities;
 using CashalotHelper.Data.Interfaces;
-using CashalotHelper.Services.Interfaces;
-using System.Runtime.CompilerServices;
 
-namespace CashalotHelper.Services
+namespace CashalotHelper.Providers.Settings
 {
-    public class Settings : ISettings
+    public class SettingsProvider : ISettingsProvider
     {
         private IConfigRepository<Configuration> _configRepository;
         private Configuration _pathToMasterBranch;
@@ -40,7 +38,7 @@ namespace CashalotHelper.Services
             }
         }
 
-        public Settings(IConfigRepository<Configuration> configRepository)
+        public SettingsProvider(IConfigRepository<Configuration> configRepository)
         {
             _configRepository = configRepository;
             InitializeProperties();

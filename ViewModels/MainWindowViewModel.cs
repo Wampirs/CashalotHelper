@@ -39,8 +39,8 @@ public class MainWindowViewModel : ViewModel
 
     private ViewModel _backupManagerVM;
     private ViewModel _settingsVM;
-    public ViewModel BackupManagerVM =>_backupManagerVM??= new BackupManagerViewModel(_backupRepository);
-    public ViewModel SettingsVM => _settingsVM ??= new SettingsViewModel();
+    public ViewModel BackupManagerVM => _backupManagerVM ??= ViewModelLocator.BackupManagerViewModel;
+    public ViewModel SettingsVM => _settingsVM ??= ViewModelLocator.SettingsViewModel;
 
     #endregion
 

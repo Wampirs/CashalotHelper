@@ -1,17 +1,11 @@
-﻿using CashalotHelper.Services;
-using CashalotHelper.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CashalotHelper.ViewModels.Base;
+using CashalotHelper.Providers.Settings;
 
 namespace CashalotHelper.ViewModels
 {
     public class SettingsViewModel : ViewModel
     {
-        private Settings _settings;
+        private SettingsProvider _settings;
 
         public string PathToNonRelease 
         {

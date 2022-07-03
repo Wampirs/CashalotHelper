@@ -6,6 +6,7 @@ using CashalotHelper.Data.Entities;
 using CashalotHelper.Data.Interfaces;
 using CashalotHelper.Infrastructure.Commands;
 using CashalotHelper.Models;
+using CashalotHelper.Providers.Interfaces;
 using CashalotHelper.Services;
 using CashalotHelper.ViewModels.Base;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ namespace CashalotHelper.ViewModels;
 public class BackupManagerViewModel : ViewModel
 {
     private readonly IRepository<Data.Entities.Backup> backupsRepository;
+    private readonly ICashalotProvider cashalotProvider;
 
     #region SelectedBackup
 
@@ -139,10 +141,12 @@ public class BackupManagerViewModel : ViewModel
     #endregion
 
 
-    public BackupManagerViewModel(IRepository<Data.Entities.Backup> backups )
+    public BackupManagerViewModel(IRepository<Data.Entities.Backup> backups, ICashalotProvider programs )
     {
         backupsRepository = backups;
         Backups = new ObservableCollection<Data.Entities.Backup>(backupsRepository.Items);
+        cashalotProvider = programs;
+        Programs = new ObservableCollection<Cashalot>(cashalotProvider.Programs);
     }
 
 

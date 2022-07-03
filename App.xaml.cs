@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Configuration;
 using System.Windows;
 using CashalotHelper.Data;
 using CashalotHelper.FileSystem;
 using CashalotHelper.Services;
 using CashalotHelper.ViewModels;
+using CashalotHelper.Providers;
+using CashalotHelper.Providers.Settings;
 
 namespace CashalotHelper
 {
@@ -15,15 +16,16 @@ namespace CashalotHelper
     /// </summary>
     public partial class App : Application
     {
-        private static Settings _settings; 
+        private static SettingsProvider _settings; 
         private static IHost _host;
         public static IHost Host => _host ??=Program.CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
-        public static Settings Settings => _settings ??= Services.CreateScope().ServiceProvider.GetRequiredService<Settings>();
+        public static SettingsProvider Settings => _settings ??= Services.CreateScope().ServiceProvider.GetRequiredService<SettingsProvider>();
         public static IServiceProvider Services => Host.Services;
 
         internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
             .AddFileSystem()
             .AddDatabase(host.Configuration.GetSection("Database"))
+            .AddProviders()
             .AddServices()
             .AddViewModels()
         ;
