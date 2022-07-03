@@ -12,6 +12,7 @@ namespace CashalotHelper.ViewModels
         public static IServiceCollection AddViewModels(this IServiceCollection services) => services
             .AddSingleton<MainWindowViewModel>()
             .AddSingleton<BackupManagerViewModel>()
+            .AddSingleton<SettingsViewModel>()
 
         ;
     }

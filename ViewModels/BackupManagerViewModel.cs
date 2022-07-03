@@ -40,7 +40,7 @@ public class BackupManagerViewModel : ViewModel
     /// </summary>
     public Cashalot? SelectedProgram
     {
-        get => _selectedProgram;
+        get => _selectedProgram??=Programs.ElementAtOrDefault(0);
         set => Set(ref _selectedProgram, value);
     }
 
