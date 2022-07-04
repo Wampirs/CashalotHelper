@@ -75,16 +75,16 @@ namespace CashalotHelper.Models
             FolderPath = _path;
             Name = _name;
             ForAllUsers = _forAllUsers;
-            FileCount = FSControler.GetFileNumber(folderPath);
+            //FileCount = FSControler.GetFileNumber(folderPath);
             PathToExe = FolderPath+"\\Cashalot.exe";
-            Version = FSControler.GetFileVersion(pathToExe);
+            //Version = FSControler.GetFileVersion(pathToExe);
         }
         public Cashalot(Cashalot prog)
         {
             FolderPath = prog.FolderPath;
             Name = prog.Name;
             ForAllUsers = prog.ForAllUsers;
-            FileCount = FSControler.GetFileNumber(folderPath);
+            //FileCount = FSControler.GetFileNumber(folderPath);
             PathToExe = FolderPath + "\\Cashalot.exe";
         }
         #endregion

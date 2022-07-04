@@ -2,14 +2,12 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using CashalotHelper.Data.Entities;
 using CashalotHelper.Data.Interfaces;
 using CashalotHelper.Infrastructure.Commands;
 using CashalotHelper.Models;
 using CashalotHelper.Providers.Interfaces;
-using CashalotHelper.Services;
+using CashalotHelper.Services.Interfaces;
 using CashalotHelper.ViewModels.Base;
-using Microsoft.EntityFrameworkCore;
 
 namespace CashalotHelper.ViewModels;
 
@@ -17,6 +15,7 @@ public class BackupManagerViewModel : ViewModel
 {
     private readonly IRepository<Data.Entities.Backup> backupsRepository;
     private readonly ICashalotProvider cashalotProvider;
+    private readonly IArchivatorService archivator;
 
     #region SelectedBackup
 
@@ -78,9 +77,7 @@ public class BackupManagerViewModel : ViewModel
 
     #region CreateBackupCommand
 
-    /// <summary>
-    /// Створює новий бекап на основі обраної програми
-    /// </summary>
+    
 
     private ICommand _createBackupCommand;
 
@@ -89,7 +86,7 @@ public class BackupManagerViewModel : ViewModel
 
     private void OnCreateBackupCommandExecuted(object o)
     {
-        MessageBox.Show("Create backup");
+        archivator.PackBackup(SelectedProgram);
     }
 
     private bool CanCreateBackupCommandExecute(object o)
@@ -141,12 +138,14 @@ public class BackupManagerViewModel : ViewModel
     #endregion
 
 
-    public BackupManagerViewModel(IRepository<Data.Entities.Backup> backups, ICashalotProvider programs )
+    public BackupManagerViewModel(IRepository<Data.Entities.Backup> backups, ICashalotProvider programs,
+        IArchivatorService archivator)
     {
         backupsRepository = backups;
         Backups = new ObservableCollection<Data.Entities.Backup>(backupsRepository.Items);
         cashalotProvider = programs;
         Programs = new ObservableCollection<Cashalot>(cashalotProvider.Programs);
+        this.archivator = archivator;
     }
 
 

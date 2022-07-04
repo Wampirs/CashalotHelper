@@ -118,11 +118,11 @@ namespace CashalotHelper.Models
         {
             Id = DateTime.Now.Ticks;
             Name = prog.Name;
-            Path = FSControler.backupFolderPath + "\\" + prog.Name + Id.ToString() + ".zip";
+            //Path = FSControler.backupFolderPath + "\\" + prog.Name + Id.ToString() + ".zip";
             CreateDate = DateTime.Now.ToString("HH:mm dd.MM.yyyy");
-            ProgramVer = FSControler.GetFileVersion(prog.PathToExe);
-            FileCount = FSControler.GetFileNumber(prog.FolderPath);
-            IncludeBase = FSControler.FileExists(prog.FolderPath + "\\Cash.lot");
+            //ProgramVer = FSControler.GetFileVersion(prog.PathToExe);
+            //FileCount = FSControler.GetFileNumber(prog.FolderPath);
+            //IncludeBase = FSControler.FileExists(prog.FolderPath + "\\Cash.lot");
         }
         #endregion
 
