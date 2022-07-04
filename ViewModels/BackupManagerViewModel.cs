@@ -87,6 +87,7 @@ public class BackupManagerViewModel : ViewModel
     private void OnCreateBackupCommandExecuted(object o)
     {
         archivator.PackBackup(SelectedProgram);
+        Backups = new ObservableCollection<Data.Entities.Backup>(backupsRepository.Items);
     }
 
     private bool CanCreateBackupCommandExecute(object o)
