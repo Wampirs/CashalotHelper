@@ -12,24 +12,60 @@ namespace CashalotHelper.Services.FsControler
 {
     public class FSControler : IFSControler
     {
-        public bool IsAccessibly(string path)
+        public int GetFileNumber(string _dirToCountFiles)
         {
-            bool isFile = File.Exists(path);
+            if (_dirToCountFiles == null) throw new ArgumentNullException(nameof(_dirToCountFiles));
+            if (!Directory.Exists(_dirToCountFiles)) throw new DirectoryNotFoundException(nameof(_dirToCountFiles));
+
+            int fileNumber = Directory.GetFiles(_dirToCountFiles, "*", SearchOption.TopDirectoryOnly).Length;
+            fileNumber += Directory.GetDirectories(_dirToCountFiles, "*", SearchOption.TopDirectoryOnly).Length;
+            return fileNumber;
+        }
+
+        public string GetFileVersion(string _fileToGetVer)
+        {
+            if (_fileToGetVer == null) throw new ArgumentNullException(nameof(_fileToGetVer));
+            if (!File.Exists(_fileToGetVer)) throw new FileNotFoundException(nameof(_fileToGetVer));
+
+            var file = ShellFile.FromFilePath(_fileToGetVer);
+            String result = String.Empty;
+            string[] ver = file.Properties.System.FileVersion.Value.Split('.');
+            for (int i = 0; i < ver.Length - 1; i++)
+            { 
+                 result += ver[i];
+                 if (i != ver.Length - 2)
+                 {
+                        result += ".";
+                 }
+            }
+        return result;
+        }
+
+        public bool IsAccessibly(string _pathToCheckAccess)
+        {
+            bool isFile = File.Exists(_pathToCheckAccess);
             bool result = true;
             if (isFile)
             {
                 try
                 {
-                    using (FileStream fs = File.Open(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None)) ;
+                    using (FileStream fs = File.Open(_pathToCheckAccess, FileMode.Open, FileAccess.ReadWrite, FileShare.None)) ;
                 }
                 catch (Exception) { result = false; }
                 return result;
             }
 
-            foreach (string file in Directory.GetFiles(path))
+            foreach (string file in Directory.GetFiles(_pathToCheckAccess))
             {
                 IsAccessibly(file);
             }
+            return result;
+        }
+
+        public bool IsExists(string _pathToEnsureExist)
+        {
+            bool result = false;
+            if (File.Exists(_pathToEnsureExist)|| Directory.Exists(_pathToEnsureExist)) result= true;
             return result;
         }
 

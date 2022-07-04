@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CashalotHelper.Providers.FileSystem;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +11,7 @@ namespace CashalotHelper.Data
             services
                 .AddDbContext<HelperDb>(opt =>
                     {
-                        opt.UseSqlite($"Data Source={FileSystem.FileSystem.MainDirectory}\\CashalotHelper.db");
+                        opt.UseSqlite($"Data Source={FileSystem.MainDirectory}\\CashalotHelper.db");
                     }
                 )
                 .AddTransient<DbInitializer>()

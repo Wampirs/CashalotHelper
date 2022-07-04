@@ -8,6 +8,10 @@ namespace CashalotHelper.Services.FsControler
 {
     public interface IFSControler
     {
-        public bool IsAccessibly (string path);
+        public bool IsAccessibly (string _pathToCheckAccess);
+
+        public string GetFileVersion(string _fileToGetVer);
+        public int GetFileNumber(string _dirToCountFiles);
+        public bool IsExists(string _pathToEnsureExist);
     }
 }
