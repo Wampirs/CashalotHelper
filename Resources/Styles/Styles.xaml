@@ -5,6 +5,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Background" Value="{DynamicResource MainActivePositiveColor}"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Foreground" Value="{DynamicResource MainForegroundBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

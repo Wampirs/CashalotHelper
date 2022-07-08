@@ -6,7 +6,29 @@
              xmlns:local="clr-namespace:CashalotHelper.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid Background="{StaticResource WindowBackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="5" Background="{StaticResource ElementBackgroundColor}">
+            <Button Width="200" Height="30" Margin="5" Style="{StaticResource ButtonPositive}" HorizontalAlignment="Right"
+                    Content="Додати гілку локально"/>
+        </Grid>
+        <Grid Grid.Row="1" Margin="5"  Background="#ffffff" >
+            <DataGrid Background="#ffffff" Margin="5" ColumnWidth="*" RowHeight="25" BorderBrush="White"
+                      ItemsSource="{Binding Backups}" SelectedItem="{Binding SelectedBackup}" 
+                      GridLinesVisibility="None" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Background" Value="#ffffff"/>
+                        <Setter Property="Padding" Value="5 0 0 5"/>
+                        <Setter Property="FontSize" Value="15"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+               
+            </DataGrid>
+        </Grid>
     </Grid>
 </UserControl>
