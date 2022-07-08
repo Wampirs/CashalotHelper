@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using CashalotHelper.Data.Interfaces;
 using CashalotHelper.Infrastructure.Commands;
@@ -137,6 +139,25 @@ public class BackupManagerViewModel : ViewModel
     }
     private bool CanDeleteBackupCommandExecute(object o) => SelectedBackup!=null;
 
+    #endregion
+
+    #region OpenProgramFolderCommand
+    private ICommand openProgramFolder;
+    public ICommand OpenProgramFolderCommand => openProgramFolder ??
+        new RelayCommand(OnOpenProgramFolderCommandExecuted,CanOpenProgramFolderCommandExecute);
+
+    private void OnOpenProgramFolderCommandExecuted(object o)
+    {
+        try
+        {
+            System.Diagnostics.Process.Start(SelectedProgram.FolderPath);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
+    private bool CanOpenProgramFolderCommandExecute(object o) => SelectedProgram != null;
     #endregion
 
     #endregion
