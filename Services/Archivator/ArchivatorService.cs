@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO.Compression;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CashalotHelper.Data.Entities;
 using CashalotHelper.Data.Interfaces;
 using CashalotHelper.Models;
 using CashalotHelper.Providers.FileSystem;
+using CashalotHelper.Providers.Interfaces;
 using CashalotHelper.Services.FsControler;
 using CashalotHelper.Services.Interfaces;
 
@@ -15,12 +12,12 @@ namespace CashalotHelper.Services
 {
     internal class ArchivatorService : IArchivatorService
     {
-        private readonly IRepository<Backup> _backups;
+        private readonly IRepository<Backup> backups;
         private readonly IFSControler fsControler;
 
-        public ArchivatorService(IRepository<Backup> backups, IFSControler _fsControler)
+        public ArchivatorService(IRepository<Backup> _backups, IFSControler _fsControler)
         {
-            _backups = backups;
+            backups = _backups;
             fsControler = _fsControler;
         }
 
@@ -37,12 +34,19 @@ namespace CashalotHelper.Services
             };
             backup.Path = $"{FileSystem.BackupsDirectory}\\{backup.Name}_{backup.Id}";
             ZipFile.CreateFromDirectory(program.FolderPath, backup.Path, CompressionLevel.Fastest, false);
-            _backups.Add(backup);
+            backups.Add(backup);
         }
 
-        public void UnpackBackup(Models.Cashalot program, Backup backup)
+        public void UnpackBackup(Cashalot program, Backup backup)
         {
-            throw new NotImplementedException();
+            if (program == null) throw new ArgumentNullException(nameof(program));
+            if (backup == null) throw new ArgumentNullException(nameof(backup));
+            if (!fsControler.IsAccessibly(program.FolderPath)) throw new Exception($"Екземпляр програми {program.Name} недоступний. Можливе його використання іншою програмою");
+            if (!fsControler.IsAccessibly(backup.Path)) throw new Exception($"Бекап {backup.Path} недоступний. Можливе його використання іншою програмою");
+            fsControler.CleanDirectory(program.FolderPath);
+            ZipFile.ExtractToDirectory(backup.Path,program.FolderPath);
+            program.Version = backup.Version;
+            program.FileCount = backup.FileCount;
         }
     }
 }

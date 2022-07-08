@@ -1,21 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows;
-using System.Xml;
-using CashalotHelper.Models;
-
-using Meziantou.Framework.Win32;
 using Microsoft.WindowsAPICodePack.Shell;
 
 namespace CashalotHelper.Services.FsControler
 {
     public class FSControler : IFSControler
     {
+        public void CleanDirectory(string _dirToClean)
+        {
+            if (_dirToClean == null) throw new ArgumentNullException(nameof(_dirToClean));
+            if (!IsAccessibly(_dirToClean)) throw new Exception($"Папка {_dirToClean} недосяжна або використовується іншою програмою");
+            foreach (String file in Directory.GetFiles(_dirToClean))
+            {
+                DeleteFile(file);
+            }
+            foreach (String directory in Directory.GetDirectories(_dirToClean))
+            {
+                Directory.Delete(directory, true);
+            }
+        }
+
+        public void DeleteFile(string _fileToDelete)
+        {
+            if (_fileToDelete == null) throw new ArgumentNullException(nameof(_fileToDelete));
+            if (!IsAccessibly(_fileToDelete)) throw new Exception($"Файл {_fileToDelete} недосяжний або використовуэться ыншою програмою");
+                try
+                {
+                    File.Delete(_fileToDelete);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Помилка при видаленні {_fileToDelete}", ex);
+                }
+        }
+
         public int GetFileNumber(string _dirToCountFiles)
         {
             if (_dirToCountFiles == null) throw new ArgumentNullException(nameof(_dirToCountFiles));
-            if (!Directory.Exists(_dirToCountFiles)) throw new DirectoryNotFoundException(nameof(_dirToCountFiles));
+            if (!Directory.Exists(_dirToCountFiles)) throw new Exception($"Папка {_dirToCountFiles} недосяжна");
 
             int fileNumber = Directory.GetFiles(_dirToCountFiles, "*", SearchOption.TopDirectoryOnly).Length;
             fileNumber += Directory.GetDirectories(_dirToCountFiles, "*", SearchOption.TopDirectoryOnly).Length;
@@ -25,7 +48,7 @@ namespace CashalotHelper.Services.FsControler
         public string GetFileVersion(string _fileToGetVer)
         {
             if (_fileToGetVer == null) throw new ArgumentNullException(nameof(_fileToGetVer));
-            if (!File.Exists(_fileToGetVer)) throw new FileNotFoundException(nameof(_fileToGetVer));
+            if (!File.Exists(_fileToGetVer)) throw new Exception($"Файл {_fileToGetVer} недосяжний");
 
             var file = ShellFile.FromFilePath(_fileToGetVer);
             String result = String.Empty;
@@ -43,6 +66,7 @@ namespace CashalotHelper.Services.FsControler
 
         public bool IsAccessibly(string _pathToCheckAccess)
         {
+            if (_pathToCheckAccess ==null) throw new ArgumentNullException(nameof(_pathToCheckAccess));
             bool isFile = File.Exists(_pathToCheckAccess);
             bool result = true;
             if (isFile)
@@ -64,6 +88,7 @@ namespace CashalotHelper.Services.FsControler
 
         public bool IsExists(string _pathToEnsureExist)
         {
+            if (_pathToEnsureExist == null) throw new ArgumentNullException(nameof(_pathToEnsureExist));
             bool result = false;
             if (File.Exists(_pathToEnsureExist)|| Directory.Exists(_pathToEnsureExist)) result= true;
             return result;

@@ -109,7 +109,7 @@ public class BackupManagerViewModel : ViewModel
         new RelayCommand(OnRestoreBackupCommandExecuted, CanRestoreBackupCommandExecute);
     private void OnRestoreBackupCommandExecuted(object o)
     {
-        MessageBox.Show("RestoreBackup");
+        archivator.UnpackBackup(SelectedProgram, SelectedBackup);
     }
 
     private bool CanRestoreBackupCommandExecute(object o)
