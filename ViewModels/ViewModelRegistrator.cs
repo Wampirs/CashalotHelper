@@ -13,6 +13,7 @@ namespace CashalotHelper.ViewModels
             .AddSingleton<MainWindowViewModel>()
             .AddSingleton<BackupManagerViewModel>()
             .AddSingleton<SettingsViewModel>()
+            .AddSingleton<BranchManagerViewModel>()
 
         ;
     }

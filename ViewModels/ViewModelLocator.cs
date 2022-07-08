@@ -12,5 +12,6 @@ namespace CashalotHelper.ViewModels
         public static MainWindowViewModel MainWindowViewModel => App.Services.GetRequiredService<MainWindowViewModel>();
         public static BackupManagerViewModel BackupManagerViewModel => App.Services.GetRequiredService<BackupManagerViewModel>();
         public static SettingsViewModel SettingsViewModel => App.Services.GetRequiredService<SettingsViewModel>();
+        public static BranchManagerViewModel BranchManagerViewModel => App.Services.GetRequiredService<BranchManagerViewModel>();   
     }
 }

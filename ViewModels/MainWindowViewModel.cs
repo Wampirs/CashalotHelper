@@ -39,8 +39,10 @@ public class MainWindowViewModel : ViewModel
 
     private ViewModel _backupManagerVM;
     private ViewModel _settingsVM;
+    private ViewModel _branchManagerVM;
     public ViewModel BackupManagerVM => _backupManagerVM ??= ViewModelLocator.BackupManagerViewModel;
     public ViewModel SettingsVM => _settingsVM ??= ViewModelLocator.SettingsViewModel;
+    public ViewModel BranchManagerVM => _branchManagerVM ??= ViewModelLocator.BranchManagerViewModel;
 
     #endregion
 
