@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CashalotHelper
+namespace CashalotHelper.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для SettingsView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SettingsView : UserControl
     {
-        public MainWindow()
+        public SettingsView()
         {
             InitializeComponent();
-        }
-
-        private void ToolBarGrid_OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
         }
     }
 }

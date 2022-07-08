@@ -3,9 +3,109 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:CashalotHelper.ViewModels"
+        xmlns:cmd ="clr-namespace:CashalotHelper.Infrastructure.Commands"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="{Binding Path=Title}" Height="500" Width="850" 
+        ResizeMode="NoResize" WindowStyle="None"
+        x:Name="Window"
+        DataContext="{Binding Path=MainWindowViewModel ,Source={StaticResource Locator}}">
 
+
+    <Grid x:Name="MainWindowGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="475"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="ToolBarGrid" Grid.Row="0" Grid.Column="0" Height="25"  Background="#10316b" MouseDown="ToolBarGrid_OnMouseDown" >
+            <TextBlock x:Name="ProgramNameLabel" Text="{Binding Path=Title}" Foreground="White" FontSize="15" Margin="5 2 0 0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  >
+                <Button x:Name="PinButton" Height="15" Width="15" Margin="0 0 5 0"
+                        Style="{StaticResource ToolBarButton}" Command="{Binding PinWindowCommand}"
+                        CommandParameter="{Binding ElementName=Window}">
+                    <Image Source="{Binding PinImage}" Height="15" Width="15" Opacity="0.3"/>
+                </Button>
+                <Button x:Name="MinButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButton}" >
+                    <Button.Command>
+                        <cmd:MinimizeWindowCommand/>
+                    </Button.Command>
+                    <Button.CommandParameter>
+                        <Binding ElementName="Window"/>
+                    </Button.CommandParameter>
+                    <Image Source="/CashalotHelper;component/Resources/Images/MinimazeButton.png" Height="15" Width="15" Opacity="0.3"/>
+                </Button>
+                <Button x:Name="CloseButton" Height="15" Width="15" Margin="0 0 5 0" Style="{StaticResource ToolBarButton}" >
+                    <Button.Command>
+                        <cmd:CloseWindowCommand/>
+                    </Button.Command>
+                    <Button.CommandParameter>
+                        <Binding ElementName="Window"/>
+                    </Button.CommandParameter>
+                    <Image Source="/CashalotHelper;component/Resources/Images/CloseButton.png" Height="10" Width="10" Opacity="0.3"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+
+
+
+        <TabControl Grid.Row="1" TabStripPlacement="Left" Width="850" Style="{StaticResource TabControl}" >
+            <TabItem x:Name="BackupManagerTab" Width="50" Height="50" Style="{StaticResource TabItem}" >
+                <TabItem.Header>
+                    <Image Source="pack://application:,,,/Resources/Images/Archive.png" Height="40" Width="40" ToolTip="BackupManager"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <ContentControl Content="{Binding BackupManagerVM}"/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem x:Name="BranchManagerTab" Width="50" Height="50" Style="{StaticResource TabItem}">
+                <TabItem.Header>
+                    <Image Source="/CashalotHelper;component/Resources/Images/Branch.png" Width="40" Height="40" ToolTip="BranchManager"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid >
+                        <!--<Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Center" Background="#ffffff" Width="780" Height="40">
+                            <Button x:Name="AddBranchBtn" Grid.Row="0" Height="30" Width="200" HorizontalAlignment="Right" Margin="5" Style="{StaticResource ButtonPositive}" Content="Додати гілку" FontSize="15" Foreground="#ffffff"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#ffffff" Width="780" Height="365" >
+                        <DataGrid x:Name="LocalBranchGrid" HorizontalAlignment="Center" VerticalAlignment="Top"
+                                Background="#ffffff" Margin="5" ColumnWidth="*" RowHeight="25" BorderBrush="White"
+                                GridLinesVisibility="None" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False">
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="Background" Value="#ffffff"/>
+                                        <Setter Property="Padding" Value="5 0 0 5"/>
+                                        <Setter Property="FontSize" Value="15"/>
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+                            </DataGrid>
+                        </Grid>-->
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem x:Name="ApiTab"  Width="50" Height="50" Style="{StaticResource TabItem}">
+                <TabItem.Header>
+                    <Image Source="/CashalotHelper;component/Resources/Images/Api.png" Width="40" Height="40" ToolTip="API"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem x:Name="SettingsTab" Width="50" Height="50" Style="{StaticResource TabItem}">
+                <TabItem.Header>
+                    <Image Source="/CashalotHelper;component/Resources/Images/Settings.png" Width="40" Height="40" ToolTip="Settings"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <ContentControl Content="{Binding SettingsVM}" />
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
