@@ -24,16 +24,16 @@ namespace CashalotHelper.Data
         {
             await _db.Database.MigrateAsync().ConfigureAwait(false);
 
-            await _db.Backups.AddAsync(new Backup()
-            {
-                Note = "Some Note",
-                Name = "Some Name",
-                CreateDate = DateTime.Now,
-                FileCount = 12,
-                Path = "Some Path",
-                Version = "Some Version"
-            });
-            await _db.SaveChangesAsync();
+            //await _db.Backups.AddAsync(new Backup()
+            //{
+            //    Note = "Some Note",
+            //    Name = "Some Name",
+            //    CreateDate = DateTime.Now,
+            //    FileCount = 12,
+            //    Path = "Some Path",
+            //    Version = "Some Version"
+            //});
+            //await _db.SaveChangesAsync();
         }
     }
 }

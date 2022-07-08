@@ -1,5 +1,6 @@
 ﻿using CashalotHelper.Models;
 using CashalotHelper.Providers.Interfaces;
+using CashalotHelper.Services.FsControler;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,13 @@ namespace CashalotHelper.Providers
 {
     public class CashalotProvider : ICashalotProvider
     {
+        private IFSControler fsControler;
         private List<Cashalot> _programs;
         public List<Cashalot> Programs => _programs ??= new List<Cashalot>();
 
-        public CashalotProvider()
+        public CashalotProvider(IFSControler _fSControler)
         {
+            fsControler = _fSControler;
             Initialize();
         }
 
@@ -37,7 +40,15 @@ namespace CashalotHelper.Providers
                             {
                                 if (Directory.Exists(MachineKey.OpenSubKey(keyName).GetValue("PATH").ToString()))
                                 {
-                                    Programs.Add(new Cashalot(keyName, MachineKey.OpenSubKey(keyName).GetValue("PATH").ToString(), true));
+                                    Programs.Add(new Cashalot
+                                    {
+                                        Name = keyName,
+                                        FolderPath = MachineKey.OpenSubKey(keyName).GetValue("PATH").ToString(),
+                                        FileCount = fsControler.GetFileNumber(MachineKey.OpenSubKey(keyName).GetValue("PATH").ToString()),
+                                        Version = fsControler.GetFileVersion(MachineKey.OpenSubKey(keyName).GetValue("PATH").ToString() + "\\Cashalot.exe"),
+                                        ForAllUsers = true, 
+
+                                    });
                                     EmptyMachineKey = false;
                                 }
                             }
@@ -62,7 +73,14 @@ namespace CashalotHelper.Providers
                             {
                                 if (Directory.Exists(UserKey.OpenSubKey(keyName).GetValue("PATH").ToString()))
                                 {
-                                    Programs.Add(new Cashalot(keyName, UserKey.OpenSubKey(keyName).GetValue("PATH").ToString(), false));
+                                    Programs.Add(new Cashalot
+                                    {
+                                        Name = keyName,
+                                        FolderPath = UserKey.OpenSubKey(keyName).GetValue("PATH").ToString(),
+                                        FileCount = fsControler.GetFileNumber(UserKey.OpenSubKey(keyName).GetValue("PATH").ToString()),
+                                        Version = fsControler.GetFileVersion(UserKey.OpenSubKey(keyName).GetValue("PATH").ToString() + "\\Cashalot.exe"),
+                                        ForAllUsers = false,
+                                    });
                                     EmptyUserKey = false;
                                 }
                             }

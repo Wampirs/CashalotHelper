@@ -1,4 +1,5 @@
-﻿using CashalotHelper.Services.Interfaces;
+﻿using CashalotHelper.Services.FsControler;
+using CashalotHelper.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CashalotHelper.Services
@@ -7,6 +8,7 @@ namespace CashalotHelper.Services
     {
         public static IServiceCollection AddServices(this IServiceCollection services) => services
             .AddTransient<IArchivatorService,ArchivatorService>()
+            .AddTransient<IFSControler,FSControler>()
         ;
     }
 }

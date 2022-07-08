@@ -3,11 +3,11 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
 using CashalotHelper.Data;
-using CashalotHelper.FileSystem;
 using CashalotHelper.Services;
 using CashalotHelper.ViewModels;
 using CashalotHelper.Providers;
 using CashalotHelper.Providers.Settings;
+using CashalotHelper.Providers.FileSystem;
 
 namespace CashalotHelper
 {

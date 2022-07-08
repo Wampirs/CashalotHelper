@@ -10,7 +10,6 @@ namespace CashalotHelper.Models
         #region Fields
         private string name;
         private string folderPath;
-        private string pathToExe;
         private bool forAllUsers;
         private int fileCount;
         private string version;
@@ -20,7 +19,7 @@ namespace CashalotHelper.Models
         public String FolderPath 
         { 
             get { return folderPath; }
-            private set 
+            set 
             {
                 folderPath = value; 
                 OnPropertyChanged("FolderPath");
@@ -29,7 +28,7 @@ namespace CashalotHelper.Models
         public String Name 
         { 
             get { return name; }
-            private set
+            set
             { 
                 name = value;
                 OnPropertyChanged("Name");
@@ -38,7 +37,7 @@ namespace CashalotHelper.Models
         public bool ForAllUsers 
         {
             get { return forAllUsers; }
-            private set
+            set
             {
                 forAllUsers = value;
                 OnPropertyChanged("ForAllUsers");
@@ -55,12 +54,7 @@ namespace CashalotHelper.Models
         }
         public string PathToExe 
         {
-            get { return pathToExe; } 
-            private set 
-            {
-                pathToExe = value;
-                OnPropertyChanged("PathToExe");
-            }
+            get { return FolderPath + "\\Cashalot.exe"; } 
         }
         public String Version
         {
@@ -69,25 +63,6 @@ namespace CashalotHelper.Models
         }
         #endregion
 
-        #region Constructors
-        public Cashalot(string _name, string _path, bool _forAllUsers)
-        {
-            FolderPath = _path;
-            Name = _name;
-            ForAllUsers = _forAllUsers;
-            FileCount = FSControler.GetFileNumber(folderPath);
-            PathToExe = FolderPath+"\\Cashalot.exe";
-            Version = FSControler.GetFileVersion(pathToExe);
-        }
-        public Cashalot(Cashalot prog)
-        {
-            FolderPath = prog.FolderPath;
-            Name = prog.Name;
-            ForAllUsers = prog.ForAllUsers;
-            FileCount = FSControler.GetFileNumber(folderPath);
-            PathToExe = FolderPath + "\\Cashalot.exe";
-        }
-        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
