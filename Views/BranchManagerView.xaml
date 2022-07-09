@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Margin="5" Background="{StaticResource ElementBackgroundColor}">
             <Button Width="200" Height="30" Margin="5" Style="{StaticResource ButtonPositive}" HorizontalAlignment="Right"
-                    Content="Додати гілку локально"/>
+                    Content="Додати гілку локально" Command="{Binding SelectBranchCommand}"/>
         </Grid>
         <Grid Grid.Row="1" Margin="5"  Background="#ffffff" >
             <DataGrid x:Name="BranchesGrid" Background="#ffffff" Margin="5" ColumnWidth="*" RowHeight="25" BorderBrush="White" 

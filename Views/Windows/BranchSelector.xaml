@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CashalotHelper.Views.Windows"
         mc:Ignorable="d"
-        Title="BranchSelector" Height="auto" Width="500" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" WindowStyle="None">
+        Title="BranchSelector" Height="auto" Width="500" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" WindowStyle="None"
+        DataContext="{Binding Source={StaticResource Locator}, Path=BranchSelectorViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -17,7 +18,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="ToolBarGrid" Height="25"  Background="{StaticResource MainActivePositiveColor}" MouseLeftButtonDown="ToolBarGrid_MouseLeftButtonDown" VerticalAlignment="Top"
+        <Grid x:Name="ToolBarGrid" Height="25"  Background="{StaticResource MainActivePositiveColor}" VerticalAlignment="Top"
               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <TextBlock x:Name="TitleBox" Foreground="#ffffff" FontSize="15" Margin="5 2 0 0" TextAlignment="Center" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  >

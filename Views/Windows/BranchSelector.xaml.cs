@@ -19,9 +19,26 @@ namespace CashalotHelper.Views.Windows
     /// </summary>
     public partial class BranchSelector : Window
     {
-        public BranchSelector()
+        private static BranchSelector instance; 
+        private BranchSelector()
         {
             InitializeComponent();
+        }
+
+        public static void OpenWindow()
+        {
+            instance = new BranchSelector();
+            instance.ShowDialog();
+        }
+
+        public static void CloseWindow()
+        {
+            if (instance != null && instance.IsActive) instance.Close();
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            CloseWindow();
         }
     }
 }
