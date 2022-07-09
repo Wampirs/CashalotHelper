@@ -16,8 +16,7 @@
                     Content="Додати гілку локально"/>
         </Grid>
         <Grid Grid.Row="1" Margin="5"  Background="#ffffff" >
-            <DataGrid Background="#ffffff" Margin="5" ColumnWidth="*" RowHeight="25" BorderBrush="White"
-                      ItemsSource="{Binding Backups}" SelectedItem="{Binding SelectedBackup}" 
+            <DataGrid Background="#ffffff" Margin="5" ColumnWidth="*" RowHeight="25" BorderBrush="White" 
                       GridLinesVisibility="None" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">

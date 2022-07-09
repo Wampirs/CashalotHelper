@@ -6,6 +6,7 @@
         <Setter Property="Background" Value="{DynamicResource MainActivePositiveColor}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Foreground" Value="{DynamicResource MainForegroundBrush}"/>
+        <Setter Property="FontSize" Value="15"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
