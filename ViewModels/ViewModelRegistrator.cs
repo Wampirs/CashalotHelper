@@ -10,10 +10,10 @@ namespace CashalotHelper.ViewModels
     public static class ViewModelRegistrator
     {
         public static IServiceCollection AddViewModels(this IServiceCollection services) => services
-            .AddSingleton<MainWindowViewModel>()
-            .AddSingleton<BackupManagerViewModel>()
-            .AddSingleton<SettingsViewModel>()
-            .AddSingleton<BranchManagerViewModel>()
+            .AddTransient<MainWindowViewModel>()
+            .AddTransient<BackupManagerViewModel>()
+            .AddTransient<SettingsViewModel>()
+            .AddTransient<BranchManagerViewModel>()
 
         ;
     }
