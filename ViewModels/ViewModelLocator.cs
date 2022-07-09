@@ -9,8 +9,11 @@ namespace CashalotHelper.ViewModels
 {
     class ViewModelLocator
     {
-        public static MainWindowViewModel MainWindowViewModel => App.Services.GetRequiredService<MainWindowViewModel>();
-        public static BackupManagerViewModel BackupManagerViewModel => App.Services.GetRequiredService<BackupManagerViewModel>();
-        public static SettingsViewModel SettingsViewModel => App.Services.GetRequiredService<SettingsViewModel>();
+        private static MainWindowViewModel mainWindowVM;
+        private static BackupManagerViewModel backupManagerVM;
+        private static SettingsViewModel settingsVM;
+        public static MainWindowViewModel MainWindowViewModel => mainWindowVM ??= App.Services.GetRequiredService<MainWindowViewModel>();
+        public static BackupManagerViewModel BackupManagerViewModel => backupManagerVM ??= App.Services.GetRequiredService<BackupManagerViewModel>();
+        public static SettingsViewModel SettingsViewModel => settingsVM ??= App.Services.GetRequiredService<SettingsViewModel>();
     }
 }
