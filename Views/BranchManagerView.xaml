@@ -16,8 +16,9 @@
                     Content="Додати гілку локально"/>
         </Grid>
         <Grid Grid.Row="1" Margin="5"  Background="#ffffff" >
-            <DataGrid Background="#ffffff" Margin="5" ColumnWidth="*" RowHeight="25" BorderBrush="White" 
-                      GridLinesVisibility="None" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid x:Name="BranchesGrid" Background="#ffffff" Margin="5" ColumnWidth="*" RowHeight="25" BorderBrush="White" 
+                      GridLinesVisibility="None" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False"
+                      ItemsSource="{Binding LocalBranches}" SelectedItem="{Binding SelectedBranch}">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="BorderThickness" Value="0"/>
@@ -26,6 +27,42 @@
                         <Setter Property="FontSize" Value="15"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Назва гілки" IsReadOnly="True" CanUserSort="True" 
+                                        Binding="{Binding Path=Name}" Width="Auto" FontSize="15"/>
+                    <DataGridTextColumn Header="Примітка" IsReadOnly="True" CanUserSort="True" 
+                                        Binding="{Binding Path=Note}" Width="*" FontSize="15"/>
+                    <DataGridTemplateColumn Width="30">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="RunBat" Height="20" Width="20" Style="{StaticResource OpenFolderBtn}" 
+                                        Command="{Binding ElementName=BranchesGrid, Path=DataContext.DeleteBackupCommand}" CommandParameter="{Binding ElementName=BackupsGrid, Path=DataContext.SelectedBackup}">
+                                    <Image Source="/CashalotHelper;component/Resources/Images/Delete.png" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="30">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="RunExe" Height="20" Width="20" Style="{StaticResource OpenFolderBtn}" 
+                                        Command="{Binding ElementName=BranchesGrid, Path=DataContext.DeleteBackupCommand}" CommandParameter="{Binding ElementName=BackupsGrid, Path=DataContext.SelectedBackup}">
+                                    <Image Source="/CashalotHelper;component/Resources/Images/Delete.png" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="30">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="DelBranch" Height="20" Width="20" Style="{StaticResource OpenFolderBtn}" 
+                                        Command="{Binding ElementName=BranchesGrid, Path=DataContext.DeleteBackupCommand}" CommandParameter="{Binding ElementName=BackupsGrid, Path=DataContext.SelectedBackup}">
+                                    <Image Source="/CashalotHelper;component/Resources/Images/Delete.png" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
                
             </DataGrid>
         </Grid>
