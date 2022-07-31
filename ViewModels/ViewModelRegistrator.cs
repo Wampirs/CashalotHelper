@@ -15,6 +15,7 @@ namespace CashalotHelper.ViewModels
             .AddTransient<SettingsViewModel>()
             .AddTransient<BranchManagerViewModel>()
             .AddTransient<BranchSelectorViewModel>()
+            .AddTransient<BranchSelectorViewModel>()
 
         ;
     }

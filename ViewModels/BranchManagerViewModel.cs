@@ -1,6 +1,7 @@
 ﻿using CashalotHelper.Data.Entities;
 using CashalotHelper.Data.Interfaces;
 using CashalotHelper.Infrastructure.Commands;
+using CashalotHelper.Services;
 using CashalotHelper.ViewModels.Base;
 using CashalotHelper.Views.Windows;
 using System;
@@ -16,7 +17,7 @@ namespace CashalotHelper.ViewModels
     public class BranchManagerViewModel : ViewModel
     {
         private readonly IRepository<CashalotBranch> branchRepository;
-
+        private readonly IDialogWindowService dialog;
 
         private ObservableCollection<CashalotBranch> localBranches;
         public ObservableCollection<CashalotBranch> LocalBranches => localBranches;
@@ -27,9 +28,10 @@ namespace CashalotHelper.ViewModels
             set => Set(ref selectedBranch, value);
         }
 
-        public BranchManagerViewModel(IRepository<CashalotBranch> _branchRepository)
+        public BranchManagerViewModel(IRepository<CashalotBranch> _branchRepository, IDialogWindowService _dialog)
         {
             branchRepository = _branchRepository;
+            dialog = _dialog;
             localBranches = new ObservableCollection<CashalotBranch>(branchRepository.Items);
         }
 
@@ -39,7 +41,7 @@ namespace CashalotHelper.ViewModels
 
         private void OnSelectBranchCommandExecuted (object o)
         {
-            BranchSelector.OpenWindow();
+            dialog.ShowDialog(ViewModelLocator.BranchSelectorViewModel);
         }
         private bool CanSelectBranchCommandExecute(object o) => true;
     }

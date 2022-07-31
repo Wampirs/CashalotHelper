@@ -1,7 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm ="clr-namespace:CashalotHelper.ViewModels"
-                    xmlns:view="clr-namespace:CashalotHelper.Views">
+                    xmlns:view="clr-namespace:CashalotHelper.Views"
+                    xmlns:helps="clr-namespace:CashalotHelper.Views.Helpers.UCViews">
+
 
     <DataTemplate DataType="{x:Type vm:BackupManagerViewModel}">
         <view:BackupManagerView DataContext="{Binding}"/>
@@ -13,5 +15,8 @@
 
     <DataTemplate DataType="{x:Type vm:BranchManagerViewModel}">
         <view:BranchManagerView DataContext="{Binding}"/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:BranchSelectorViewModel}">
+        <helps:BranchSelector DataContext="{Binding}"/>
     </DataTemplate>
 </ResourceDictionary>

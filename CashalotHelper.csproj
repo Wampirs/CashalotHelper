@@ -29,7 +29,6 @@
   <ItemGroup>
     <Folder Include="Infrastructure\Commands\Base\" />
     <Folder Include="ViewModels\Base\" />
-    <Folder Include="Views\Helpers\" />
   </ItemGroup>
 
   <ItemGroup>
