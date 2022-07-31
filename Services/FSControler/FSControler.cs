@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Windows;
+﻿using CashalotHelper.Providers.FileSystem;
 using Microsoft.WindowsAPICodePack.Shell;
+using System;
+using System.IO;
 
-namespace CashalotHelper.Services.FsControler
+namespace CashalotHelper.Services
 {
     public class FSControler : IFSControler
     {
@@ -25,14 +25,14 @@ namespace CashalotHelper.Services.FsControler
         {
             if (_fileToDelete == null) throw new ArgumentNullException(nameof(_fileToDelete));
             if (!IsAccessibly(_fileToDelete)) throw new Exception($"Файл {_fileToDelete} недосяжний або використовуэться ыншою програмою");
-                try
-                {
-                    File.Delete(_fileToDelete);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"Помилка при видаленні {_fileToDelete}", ex);
-                }
+            try
+            {
+                File.Delete(_fileToDelete);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Помилка при видаленні {_fileToDelete}", ex);
+            }
         }
 
         public int GetFileNumber(string _dirToCountFiles)
@@ -54,19 +54,19 @@ namespace CashalotHelper.Services.FsControler
             String result = String.Empty;
             string[] ver = file.Properties.System.FileVersion.Value.Split('.');
             for (int i = 0; i < ver.Length - 1; i++)
-            { 
-                 result += ver[i];
-                 if (i != ver.Length - 2)
-                 {
-                        result += ".";
-                 }
+            {
+                result += ver[i];
+                if (i != ver.Length - 2)
+                {
+                    result += ".";
+                }
             }
-        return result;
+            return result;
         }
 
         public bool IsAccessibly(string _pathToCheckAccess)
         {
-            if (_pathToCheckAccess ==null) throw new ArgumentNullException(nameof(_pathToCheckAccess));
+            if (_pathToCheckAccess == null) throw new ArgumentNullException(nameof(_pathToCheckAccess));
             bool isFile = File.Exists(_pathToCheckAccess);
             bool result = true;
             if (isFile)
@@ -90,10 +90,21 @@ namespace CashalotHelper.Services.FsControler
         {
             if (_pathToEnsureExist == null) throw new ArgumentNullException(nameof(_pathToEnsureExist));
             bool result = false;
-            if (File.Exists(_pathToEnsureExist)|| Directory.Exists(_pathToEnsureExist)) result= true;
+            if (File.Exists(_pathToEnsureExist) || Directory.Exists(_pathToEnsureExist)) result = true;
             return result;
         }
 
+        public void CreateShortcut(string _targetFilePath, string _shortcutName)
+        {
+            IWshRuntimeLibrary.WshShell wshShell = new IWshRuntimeLibrary.WshShell();
+
+            IWshRuntimeLibrary.IWshShortcut Shortcut = (IWshRuntimeLibrary.IWshShortcut)wshShell.
+                CreateShortcut($"{FileSystem.BranchesDirectory}\\{_shortcutName}.lnk");
+
+            Shortcut.TargetPath = _targetFilePath; //путь к целевому файлу
+
+            Shortcut.Save();
+        }
 
 
 

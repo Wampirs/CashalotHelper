@@ -1,15 +1,14 @@
-﻿using System;
+﻿using CashalotHelper.Data.Interfaces;
+using CashalotHelper.Infrastructure.Commands;
+using CashalotHelper.Models;
+using CashalotHelper.Providers.Interfaces;
+using CashalotHelper.Services;
+using CashalotHelper.ViewModels.Base;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using CashalotHelper.Data.Interfaces;
-using CashalotHelper.Infrastructure.Commands;
-using CashalotHelper.Models;
-using CashalotHelper.Providers.Interfaces;
-using CashalotHelper.Services.FsControler;
-using CashalotHelper.Services.Interfaces;
-using CashalotHelper.ViewModels.Base;
 
 namespace CashalotHelper.ViewModels;
 
@@ -26,8 +25,8 @@ public class BackupManagerViewModel : ViewModel
     /// <summary>
     /// Вибраний бекап зі списку бекапів 
     /// </summary>
-    public Data.Entities.Backup? SelectedBackup 
-    { 
+    public Data.Entities.Backup? SelectedBackup
+    {
         get => _selectedBackup;
         set => Set(ref _selectedBackup, value);
     }
@@ -42,7 +41,7 @@ public class BackupManagerViewModel : ViewModel
     /// </summary>
     public Cashalot? SelectedProgram
     {
-        get => _selectedProgram??=Programs.ElementAtOrDefault(0);
+        get => _selectedProgram ??= Programs.ElementAtOrDefault(0);
         set => Set(ref _selectedProgram, value);
     }
 
@@ -80,7 +79,7 @@ public class BackupManagerViewModel : ViewModel
 
     #region CreateBackupCommand
 
-    
+
 
     private ICommand _createBackupCommand;
 
@@ -108,7 +107,7 @@ public class BackupManagerViewModel : ViewModel
     /// </summary>
 
     private ICommand _restoreBackupCommand;
-    public ICommand RestoreBackupCommand => _restoreBackupCommand ??= 
+    public ICommand RestoreBackupCommand => _restoreBackupCommand ??=
         new RelayCommand(OnRestoreBackupCommandExecuted, CanRestoreBackupCommandExecute);
     private void OnRestoreBackupCommandExecuted(object o)
     {
@@ -117,7 +116,7 @@ public class BackupManagerViewModel : ViewModel
 
     private bool CanRestoreBackupCommandExecute(object o)
     {
-        if (SelectedProgram!=null && SelectedBackup!=null) return true;
+        if (SelectedProgram != null && SelectedBackup != null) return true;
         return false;
     }
 
@@ -137,14 +136,14 @@ public class BackupManagerViewModel : ViewModel
         Backups.Remove(SelectedBackup);
         SelectedBackup = null;
     }
-    private bool CanDeleteBackupCommandExecute(object o) => SelectedBackup!=null;
+    private bool CanDeleteBackupCommandExecute(object o) => SelectedBackup != null;
 
     #endregion
 
     #region OpenProgramFolderCommand
     private ICommand openProgramFolder;
     public ICommand OpenProgramFolderCommand => openProgramFolder ??
-        new RelayCommand(OnOpenProgramFolderCommandExecuted,CanOpenProgramFolderCommandExecute);
+        new RelayCommand(OnOpenProgramFolderCommandExecuted, CanOpenProgramFolderCommandExecute);
 
     private void OnOpenProgramFolderCommandExecuted(object o)
     {

@@ -1,12 +1,9 @@
-﻿using System;
-using System.IO.Compression;
-using CashalotHelper.Data.Entities;
+﻿using CashalotHelper.Data.Entities;
 using CashalotHelper.Data.Interfaces;
 using CashalotHelper.Models;
 using CashalotHelper.Providers.FileSystem;
-using CashalotHelper.Providers.Interfaces;
-using CashalotHelper.Services.FsControler;
-using CashalotHelper.Services.Interfaces;
+using System;
+using System.IO.Compression;
 
 namespace CashalotHelper.Services
 {
@@ -44,7 +41,7 @@ namespace CashalotHelper.Services
             if (!fsControler.IsAccessibly(program.FolderPath)) throw new Exception($"Екземпляр програми {program.Name} недоступний. Можливе його використання іншою програмою");
             if (!fsControler.IsAccessibly(backup.Path)) throw new Exception($"Бекап {backup.Path} недоступний. Можливе його використання іншою програмою");
             fsControler.CleanDirectory(program.FolderPath);
-            ZipFile.ExtractToDirectory(backup.Path,program.FolderPath);
+            ZipFile.ExtractToDirectory(backup.Path, program.FolderPath);
             program.Version = backup.Version;
             program.FileCount = backup.FileCount;
         }

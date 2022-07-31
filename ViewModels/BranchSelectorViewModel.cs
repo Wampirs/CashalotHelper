@@ -14,6 +14,8 @@ namespace CashalotHelper.ViewModels
     {
         private readonly IBranchControler branchControler;
         private readonly IRepository<CashalotBranch> repository;
+        private readonly IFSControler fs;
+
         private ObservableCollection<CashalotBranch> branchList;
         private CashalotBranch selectedBranch;
         public string Title => "BranchSelector";
@@ -30,10 +32,11 @@ namespace CashalotHelper.ViewModels
         }
 
 
-        public BranchSelectorViewModel(IBranchControler _branchControler, IRepository<CashalotBranch> _repository)
+        public BranchSelectorViewModel(IBranchControler _branchControler, IRepository<CashalotBranch> _repository, IFSControler _fs)
         {
             branchControler = _branchControler;
             repository = _repository;
+            fs = _fs;
             BranchList = new ObservableCollection<CashalotBranch>(branchControler.GetRemoteBranches());
         }
 
@@ -46,6 +49,7 @@ namespace CashalotHelper.ViewModels
             branch.LocalFolderPath = "";
             branch.LocalBatFile = "";
             branch.LocalExeFile = "";
+            fs.CreateShortcut($"{branch.RemoteFolderPath}\\zstart.bat", branch.Name);
             repository.Add(branch);
             App.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive).Close();
         }
