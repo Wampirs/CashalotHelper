@@ -37,7 +37,7 @@
             <Grid Grid.Column="1" VerticalAlignment="Bottom">
                 <StackPanel Orientation="Horizontal" Width="420" Height="40">
                     <Button Height="30" Width="200" Margin="5" Style="{StaticResource ButtonPositive}" Content="Додати гілку" Command="{Binding AddCommand}"/>
-                    <Button Height="30" Width="200" Margin="5" Style="{StaticResource ButtonNegative}" Content="Відмінити"/>
+                    <Button Height="30" Width="200" Margin="5" Style="{StaticResource ButtonNegative}" Content="Відмінити" Command="{Binding CancelCommand}"/>
                 </StackPanel>
             </Grid>
         </Grid>

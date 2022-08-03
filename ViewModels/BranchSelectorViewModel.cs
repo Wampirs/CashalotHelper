@@ -1,8 +1,10 @@
 ﻿using CashalotHelper.Data.Entities;
 using CashalotHelper.Data.Interfaces;
 using CashalotHelper.Infrastructure.Commands;
+using CashalotHelper.Providers.FileSystem;
 using CashalotHelper.Services;
 using CashalotHelper.ViewModels.Base;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -46,13 +48,22 @@ namespace CashalotHelper.ViewModels
         {
             var branch = SelectedBranch;
             branch.Note = NoteTextBoxValue;
-            branch.LocalFolderPath = "";
-            branch.LocalBatFile = "";
-            branch.LocalExeFile = "";
+            branch.LocalFolderPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Branch_CLs\\{branch.Name}";
+            branch.LocalBatFile = $"{FileSystem.BranchesDirectory}\\{branch.Name}.lnk";
+            branch.LocalExeFile = $"{branch.LocalFolderPath}\\Cashalot.exe";
             fs.CreateShortcut($"{branch.RemoteFolderPath}\\zstart.bat", branch.Name);
             repository.Add(branch);
             App.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive).Close();
         }
         private bool CanAddCommandExecute(object o) => SelectedBranch != null;
+
+
+        private ICommand cancelCommand;
+        public ICommand CancelCommand => cancelCommand ??= new RelayCommand(OnCancelCommandExecuted, CanCancelCommandExecute);
+        private void OnCancelCommandExecuted(object o)
+        {
+            App.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive).Close();
+        }
+        private bool CanCancelCommandExecute(object o) => true;
     }
 }
