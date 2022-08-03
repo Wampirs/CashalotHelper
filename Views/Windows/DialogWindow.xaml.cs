@@ -24,7 +24,7 @@ namespace CashalotHelper.Views.Windows
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.Close(false);
         }
 
         private void Window_Initialized(object sender, System.EventArgs e)
@@ -34,6 +34,12 @@ namespace CashalotHelper.Views.Windows
             ownerBackground = (SolidColorBrush)Owner.Background;
             Owner.Background = new SolidColorBrush(Colors.Gray);
             Owner.Opacity = 0.5;
+        }
+
+        public void Close(bool res)
+        {
+            this.DialogResult = res;
+            base.Close();
         }
     }
 }

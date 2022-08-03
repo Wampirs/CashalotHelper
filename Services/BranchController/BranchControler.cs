@@ -14,7 +14,7 @@ namespace CashalotHelper.Services
         public List<CashalotBranch> GetRemoteBranches()
         {
             List<CashalotBranch> res = new List<CashalotBranch>();
-            var dirs = Directory.GetDirectories(App.Settings.PathToMasterBranch);
+            var dirs = Directory.GetDirectories(App.Settings.PathToBranchesFolder);
             foreach (var dir in dirs)
             {
                 if (IsBranchFolder(dir))

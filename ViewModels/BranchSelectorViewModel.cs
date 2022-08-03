@@ -4,6 +4,7 @@ using CashalotHelper.Infrastructure.Commands;
 using CashalotHelper.Providers.FileSystem;
 using CashalotHelper.Services;
 using CashalotHelper.ViewModels.Base;
+using CashalotHelper.Views.Windows;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -53,7 +54,7 @@ namespace CashalotHelper.ViewModels
             branch.LocalExeFile = $"{branch.LocalFolderPath}\\Cashalot.exe";
             fs.CreateShortcut($"{branch.RemoteFolderPath}\\zstart.bat", branch.Name);
             repository.Add(branch);
-            App.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive).Close();
+            App.Current.Windows.OfType<DialogWindow>().FirstOrDefault(x => x.IsActive).Close(true);
         }
         private bool CanAddCommandExecute(object o) => SelectedBranch != null;
 
@@ -62,7 +63,7 @@ namespace CashalotHelper.ViewModels
         public ICommand CancelCommand => cancelCommand ??= new RelayCommand(OnCancelCommandExecuted, CanCancelCommandExecute);
         private void OnCancelCommandExecuted(object o)
         {
-            App.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive).Close();
+            App.Current.Windows.OfType<DialogWindow>().FirstOrDefault(x => x.IsActive).Close(false);
         }
         private bool CanCancelCommandExecute(object o) => true;
     }
