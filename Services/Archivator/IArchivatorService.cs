@@ -1,10 +1,11 @@
 ﻿using CashalotHelper.Data.Entities;
 using CashalotHelper.Models;
+using System.Threading.Tasks;
 
 namespace CashalotHelper.Services.Interfaces;
 
 public interface IArchivatorService
 {
-    public void PackBackup(Cashalot program);
-    public void UnpackBackup(Cashalot program,Backup backup);
+    public Task<bool> PackBackup(Cashalot program);
+    public Task<bool> UnpackBackup(Cashalot program, Backup backup);
 }

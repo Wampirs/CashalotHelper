@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CashBackup.Windows"
         mc:Ignorable="d"
-        Title="MessageBox" Height="200" Width="400" WindowStartupLocation="CenterOwner"  ResizeMode="NoResize" WindowStyle="None">
+        Title="MessageBox" Height="200" Width="400" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" WindowStyle="None" SizeToContent="Height">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
