@@ -10,6 +10,7 @@ using CashalotHelper.Providers.Interfaces;
 using CashalotHelper.Services.FsControler;
 using CashalotHelper.Services.Interfaces;
 using CashalotHelper.ViewModels.Base;
+using CashalotHelper.Views.Windows;
 
 namespace CashalotHelper.ViewModels;
 
