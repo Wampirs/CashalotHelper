@@ -4,6 +4,7 @@ using CashalotHelper.Models;
 using CashalotHelper.Providers.Interfaces;
 using CashalotHelper.Services;
 using CashalotHelper.ViewModels.Base;
+using CashalotHelper.Views.Windows;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -88,8 +89,12 @@ public class BackupManagerViewModel : ViewModel
 
     private void OnCreateBackupCommandExecuted(object o)
     {
-        archivator.PackBackup(SelectedProgram);
-        Backups = new ObservableCollection<Data.Entities.Backup>(backupsRepository.Items);
+        try
+        {
+            archivator.PackBackup(SelectedProgram);
+            Backups = new ObservableCollection<Data.Entities.Backup>(backupsRepository.Items);
+        }
+        catch (Exception ex) { CustomMessageBox.Show(ex.Message, MessageType.Error); }
     }
 
     private bool CanCreateBackupCommandExecute(object o)
@@ -111,7 +116,11 @@ public class BackupManagerViewModel : ViewModel
         new RelayCommand(OnRestoreBackupCommandExecuted, CanRestoreBackupCommandExecute);
     private void OnRestoreBackupCommandExecuted(object o)
     {
-        archivator.UnpackBackup(SelectedProgram, SelectedBackup);
+        try 
+        {
+            archivator.UnpackBackup(SelectedProgram, SelectedBackup);
+        }
+        catch(Exception ex) { CustomMessageBox.Show(ex.Message, MessageType.Error); }
     }
 
     private bool CanRestoreBackupCommandExecute(object o)
