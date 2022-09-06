@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using Microsoft.WindowsAPICodePack.Shell;
 
 namespace CashalotHelper.Services.FsControler
 {
@@ -49,19 +49,8 @@ namespace CashalotHelper.Services.FsControler
         {
             if (_fileToGetVer == null) throw new ArgumentNullException(nameof(_fileToGetVer));
             if (!File.Exists(_fileToGetVer)) throw new Exception($"Файл {_fileToGetVer} недосяжний");
-
-            var file = ShellFile.FromFilePath(_fileToGetVer);
-            String result = String.Empty;
-            string[] ver = file.Properties.System.FileVersion.Value.Split('.');
-            for (int i = 0; i < ver.Length - 1; i++)
-            { 
-                 result += ver[i];
-                 if (i != ver.Length - 2)
-                 {
-                        result += ".";
-                 }
-            }
-        return result;
+            var fileVersion = FileVersionInfo.GetVersionInfo(_fileToGetVer);
+            return fileVersion.ProductVersion;
         }
 
         public bool IsAccessibly(string _pathToCheckAccess)
