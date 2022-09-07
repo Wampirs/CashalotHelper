@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Reflection;
+using System.Windows;
 using System.Windows.Input;
 using CashalotHelper.Data.Entities;
 using CashalotHelper.Data.Interfaces;
@@ -12,7 +13,7 @@ public class MainWindowViewModel : ViewModel
     private readonly IRepository<Backup> _backupRepository;
 
     #region Title
-    private string _title = "Cashalot Test Helper";
+    private string _title = Assembly.GetExecutingAssembly().GetName().Name;
     /// <summary>
     /// Заголовок окна
     /// </summary>
