@@ -159,7 +159,7 @@ public class BackupManagerViewModel : ViewModel
     {
         try
         {
-            System.Diagnostics.Process.Start(SelectedProgram.FolderPath);
+            System.Diagnostics.Process.Start("explorer.exe", SelectedProgram.FolderPath);
         }
         catch (Exception ex)
         {
