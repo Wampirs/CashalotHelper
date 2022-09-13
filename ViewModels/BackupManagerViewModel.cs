@@ -2,10 +2,12 @@
 using CashalotHelper.Infrastructure.Commands;
 using CashalotHelper.Models;
 using CashalotHelper.Providers.Interfaces;
+using CashalotHelper.Providers.Settings;
 using CashalotHelper.Services.FsControler;
 using CashalotHelper.Services.Interfaces;
 using CashalotHelper.ViewModels.Base;
 using CashalotHelper.Views.Windows;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,6 +22,7 @@ public class BackupManagerViewModel : ViewModel
     private readonly ICashalotProvider cashalotProvider;
     private readonly IArchivatorService archivator;
     private readonly IFSControler fSControler;
+    private readonly ISettingsProvider settings;
 
     #region SelectedBackup
 
@@ -168,7 +171,18 @@ public class BackupManagerViewModel : ViewModel
     }
     private bool CanOpenProgramFolderCommandExecute(object o) => SelectedProgram != null;
     #endregion
+    private ICommand prepareToTest;
+    public ICommand PrepareToTestCommand => prepareToTest ??
+        new RelayCommand(OnPrepareToTestCommandExecuted, CanPrepareToTestCommandExecute);
 
+    private void OnPrepareToTestCommandExecuted(object o)
+    {
+        //TODO: Do command to prepare to test
+    }
+    private bool CanPrepareToTestCommandExecute(object o) => SelectedProgram != null;
+    #region PrepareToTestCommand
+
+    #endregion
     #endregion
 
 
@@ -181,6 +195,8 @@ public class BackupManagerViewModel : ViewModel
         Backups = new ObservableCollection<Data.Entities.Backup>(backupsRepository.Items);
         cashalotProvider = programs;
         Programs = new ObservableCollection<Cashalot>(cashalotProvider.Programs);
+
+        settings = App.Services.GetRequiredService<ISettingsProvider>();
         this.archivator = archivator;
         this.fSControler = fSControler;
     }

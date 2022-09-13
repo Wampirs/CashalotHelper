@@ -35,6 +35,7 @@
     <None Remove="Resources\Images\Refresh.png" />
     <None Remove="Resources\Images\Settings.png" />
     <None Remove="Resources\Images\Success.png" />
+    <None Remove="Resources\Images\TestFiles.png" />
     <None Remove="Resources\Images\Warning.png" />
   </ItemGroup>
 
@@ -98,6 +99,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Success.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\TestFiles.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Warning.png">

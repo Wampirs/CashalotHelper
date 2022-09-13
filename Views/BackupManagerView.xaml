@@ -13,8 +13,8 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Center" Background="#ffffff" Width="780" Height="40">
-            <ComboBox x:Name="ProgramsComboBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Height="30" Margin="5 0 0 0" Style="{StaticResource CmbBox}"
+        <DockPanel Grid.Row="0" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Center" Background="#ffffff" Width="780" Height="40">
+            <ComboBox x:Name="ProgramsComboBox" DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Height="30" Margin="5 0 0 0" Style="{StaticResource CmbBox}"
                                         ItemsSource="{Binding Programs}" SelectedItem="{Binding SelectedProgram}" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -29,17 +29,21 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button x:Name="OpenProgramPath" Height="30" Width="30" HorizontalAlignment="Left" Margin="210 0 0 0" Background="Transparent" BorderBrush="Transparent" Style="{StaticResource OpenFolderBtn}"
+            <Button x:Name="OpenProgramPath" Height="30" Width="30" DockPanel.Dock="Left" Margin="5" Background="Transparent" BorderBrush="Transparent" Style="{StaticResource OpenFolderBtn}"
                                     Command="{Binding OpenProgramFolderCommand}">
                 <Image Source="/Resources/Images/Folder.png" Height="30" Width="30" Margin="-2"/>
             </Button>
-            <TextBlock x:Name="FileCountInProgram" HorizontalAlignment="Left" VerticalAlignment="Center" Width="320"  Margin="250 0 0 0" FontSize="15" Foreground="#000000"
+            <Button Height="30" Width="30" Margin="5" DockPanel.Dock="Left" Background="Transparent" BorderBrush="Transparent" Style="{StaticResource OpenFolderBtn}" Cursor="Hand"
+                    Command="{Binding PrepareToTestCommand}">
+                <Image Source="/Resources/Images/TestFiles.png" Height="30" Width="30" />
+            </Button>
+            <TextBlock x:Name="FileCountInProgram" HorizontalAlignment="Left" VerticalAlignment="Center" Width="auto" Margin="5 0 0 0" FontSize="15" Foreground="#000000"
                                        Text="{Binding StringFormat= Файлів в обраній програмі: {0}, Path=SelectedProgram.FileCount}"  />
-            <Button  x:Name="CreateButton" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Height="30" Margin="5" Style="{StaticResource ButtonPositive}"
+            <Button DockPanel.Dock="Right" x:Name="CreateButton" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Height="30" Margin="5" Style="{StaticResource ButtonPositive}"
                                      Command="{Binding CreateBackupCommand}">
                 <TextBlock x:Name="CreateButtonText" Text="Создать бекап" FontSize="15" Foreground="#ffffff"/>
             </Button>
-        </Grid>
+        </DockPanel>
         <Grid Grid.Row="1" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#ffffff" Width="780" Height="365" >
             <DataGrid x:Name="BackupsGrid" HorizontalAlignment="Center" VerticalAlignment="Top"
                       Background="#ffffff" Margin="5" ColumnWidth="*" RowHeight="25" BorderBrush="White"
