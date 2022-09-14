@@ -14,5 +14,6 @@ namespace CashalotHelper.Services.FsControler
         public bool IsExists(string _pathToEnsureExist);
         public void DeleteFile(string _fileToDelete);
         public void CleanDirectory(string _dirToClean);
+        public void CopyFile(string _fileToCopy,string _targetPath);
     }
 }

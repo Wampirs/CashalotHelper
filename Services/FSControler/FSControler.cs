@@ -21,6 +21,11 @@ namespace CashalotHelper.Services.FsControler
             }
         }
 
+        public void CopyFile(string _fileToCopy, string _targetPath)
+        {
+            File.Copy(_fileToCopy, _targetPath, true);
+        }
+
         public void DeleteFile(string _fileToDelete)
         {
             if (_fileToDelete == null) throw new ArgumentNullException(nameof(_fileToDelete));

@@ -52,7 +52,7 @@ namespace CashalotHelper.Providers.Settings
         {
             if (_configRepository.Get("PathToMasterBranch") == null)
             {
-                _pathToMasterBranch = new Configuration { Property = "PathToMasterBranch", Value = "" };
+                _pathToMasterBranch = new Configuration { Property = "PathToMasterBranch", Value = string.Empty };
                 SaveChangesToDb(_pathToMasterBranch);
             }
             else _pathToMasterBranch = _configRepository.Get("PathToMasterBranch");
@@ -60,7 +60,7 @@ namespace CashalotHelper.Providers.Settings
 
             if (_configRepository.Get("PathToBranchesFolder") == null)
             {
-                _pathToBranchesFolder = new Configuration { Property = "PathToBranchesFolder", Value = "" };
+                _pathToBranchesFolder = new Configuration { Property = "PathToBranchesFolder", Value = string.Empty };
                 SaveChangesToDb(_pathToBranchesFolder);
             }
             else _pathToBranchesFolder = _configRepository.Get("PathToBranchesFolder");
@@ -68,7 +68,7 @@ namespace CashalotHelper.Providers.Settings
 
             if (_configRepository.Get("PathToNonReleaseFiles") == null)
             {
-                _pathToNonReleaseFiles = new Configuration { Property = "PathToNonReleaseFiles", Value = "" };
+                _pathToNonReleaseFiles = new Configuration { Property = "PathToNonReleaseFiles", Value = string.Empty };
                 SaveChangesToDb(_pathToNonReleaseFiles);
             }
             else _pathToNonReleaseFiles = _configRepository.Get("PathToNonReleaseFiles");

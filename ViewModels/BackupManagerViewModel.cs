@@ -10,6 +10,7 @@ using CashalotHelper.Views.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -171,17 +172,47 @@ public class BackupManagerViewModel : ViewModel
     }
     private bool CanOpenProgramFolderCommandExecute(object o) => SelectedProgram != null;
     #endregion
+
+
+    #region PrepareToTestCommand
     private ICommand prepareToTest;
     public ICommand PrepareToTestCommand => prepareToTest ??
         new RelayCommand(OnPrepareToTestCommandExecuted, CanPrepareToTestCommandExecute);
 
     private void OnPrepareToTestCommandExecuted(object o)
     {
-        //TODO: Do command to prepare to test
+        //if (settings.PathToNonReleaseFiles == string.Empty)
+        //{
+        //    CustomMessageBox.Show("Не задано шлях до non release файлів", MessageType.Warning);
+        //    return;
+        //}
+        //if (!fSControler.IsExists(settings.PathToNonReleaseFiles)||)
+        //{
+        //    CustomMessageBox.Show("Заданий шлях до non release файлів некоректний", MessageType.Error);
+        //    return;
+        //}
+        if (!fSControler.IsAccessibly(SelectedProgram.PathToExe) || !fSControler.IsAccessibly(Path.Combine(SelectedProgram.FolderPath,"Cashalot.Core.dll")))
+        {
+            CustomMessageBox.Show("Файли програми використовуються іншою програмою", MessageType.Error);
+            return;
+        }
+        var pathToNonRelease = Path.Combine(settings.PathToNonReleaseFiles, SelectedProgram.Version);
+        var files = Directory.GetFiles(pathToNonRelease);
+        try
+        {
+            foreach (var file in files)
+            {
+                fSControler.CopyFile(pathToNonRelease, SelectedProgram.FolderPath);
+            }
+            SelectedProgram.TestVersion = true;
+            CustomMessageBox.Show("Тестові файли успішно підмінено", MessageType.Success);
+        }
+        catch(Exception ex)
+        {
+            CustomMessageBox.Show(ex.Message, MessageType.Error);
+        }
     }
     private bool CanPrepareToTestCommandExecute(object o) => SelectedProgram != null;
-    #region PrepareToTestCommand
-
     #endregion
     #endregion
 

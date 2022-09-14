@@ -7,7 +7,7 @@ namespace CashalotHelper.Providers
     public static class ProvidersRegistrator
     {
         public static IServiceCollection AddProviders(this IServiceCollection services) => services
-            .AddSingleton<SettingsProvider>()
+            .AddSingleton<ISettingsProvider,SettingsProvider>()
             .AddSingleton<ICashalotProvider,CashalotProvider>()
             ;
     }

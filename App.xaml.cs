@@ -19,7 +19,6 @@ namespace CashalotHelper
         private static SettingsProvider _settings; 
         private static IHost _host;
         public static IHost Host => _host ??=Program.CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
-        public static SettingsProvider Settings => _settings ??= Services.CreateScope().ServiceProvider.GetRequiredService<SettingsProvider>();
         public static IServiceProvider Services => Host.Services;
 
         internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services

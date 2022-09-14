@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using CashalotHelper.Services;
 
 namespace CashalotHelper.Models
 {
@@ -13,6 +12,7 @@ namespace CashalotHelper.Models
         private bool forAllUsers;
         private int fileCount;
         private string version;
+        private bool testVersion;
         #endregion
 
         #region Properties
@@ -60,6 +60,11 @@ namespace CashalotHelper.Models
         {
             get { return version; }
             set { version = value; OnPropertyChanged("Version"); }
+        }
+        public bool TestVersion
+        {
+            get { return testVersion; }
+            set { testVersion = value; OnPropertyChanged("TestVersion"); }
         }
         #endregion
 
