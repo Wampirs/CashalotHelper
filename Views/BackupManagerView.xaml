@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:CashalotHelper.Views"
              mc:Ignorable="d" 
              d:DesignHeight="475" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
     <Grid x:Name="BackupTabGrid" Background="#f9f9f8" VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" Height="475">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -14,18 +17,24 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Center" Background="#ffffff" Width="780" Height="40">
-            <ComboBox x:Name="ProgramsComboBox" DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Height="30" Margin="5 0 0 0" Style="{StaticResource CmbBox}"
+            <ComboBox x:Name="ProgramsComboBox" DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Center" Width="220" Height="30" Margin="5 0 0 0" Style="{StaticResource CmbBox}"
                                         ItemsSource="{Binding Programs}" SelectedItem="{Binding SelectedProgram}" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock>
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}{0}  (ver.{1})">
-                                    <Binding Path="Name" />
-                                    <Binding Path="Version" />
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Left">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} (ver.{1})">
+                                        <Binding Path="Name" />
+                                        <Binding Path="Version" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <Border DockPanel.Dock="Right" Margin="10 0 0 0" Background="#00b01f" BorderThickness="0" CornerRadius="5" VerticalAlignment="Center"
+                                    Visibility="{Binding TestVersion, Converter={StaticResource BoolToVis}}">
+                                <TextBlock Text="Test" Foreground="White" FontSize="12" Margin="5 0"/>
+                            </Border>
+                        </DockPanel>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
