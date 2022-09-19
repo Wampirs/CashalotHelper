@@ -15,172 +15,183 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-namespace CashalotHelper.ViewModels;
-
-public class BackupManagerViewModel : ViewModel
+namespace CashalotHelper.ViewModels
 {
-    private readonly IRepository<Data.Entities.Backup> backupsRepository;
-    private readonly ICashalotProvider cashalotProvider;
-    private readonly IArchivatorService archivator;
-    private readonly IFSControler fSControler;
-    private readonly ISettingsProvider settings;
 
-    #region SelectedBackup
-
-    private Data.Entities.Backup? _selectedBackup;
-    /// <summary>
-    /// Вибраний бекап зі списку бекапів 
-    /// </summary>
-    public Data.Entities.Backup? SelectedBackup
+    public class BackupManagerViewModel : ViewModel
     {
-        get => _selectedBackup;
-        set => Set(ref _selectedBackup, value);
-    }
+        private readonly IRepository<Data.Entities.Backup> backupsRepository;
+        private readonly ICashalotProvider cashalotProvider;
+        private readonly IArchivatorService archivator;
+        private readonly IFSControler fSControler;
+        private readonly ISettingsProvider settings;
 
-    #endregion
+        #region SelectedBackup
 
-    #region SelectedProgram
-
-    private Cashalot? _selectedProgram;
-    /// <summary>
-    /// Вибрана програма зі списку встановлених
-    /// </summary>
-    public Cashalot? SelectedProgram
-    {
-        get => _selectedProgram ??= Programs.ElementAtOrDefault(0);
-        set => Set(ref _selectedProgram, value);
-    }
-
-    #endregion
-
-    #region ProgramsViewCollection
-
-    private ObservableCollection<Cashalot> _programs = null!;
-    /// <summary>
-    /// Колекція встановлених програм 
-    /// </summary>
-    public ObservableCollection<Cashalot> Programs
-    {
-        get => _programs;
-        private set => Set(ref _programs, value);
-    }
-
-    #endregion
-
-    #region BackupsViewCollection
-
-    private ObservableCollection<Data.Entities.Backup> _backups;
-    /// <summary>
-    /// Колекція наявних бекапів
-    /// </summary>
-    public ObservableCollection<Data.Entities.Backup> Backups
-    {
-        get => _backups;
-        private set => Set(ref _backups, value);
-    }
-
-    #endregion
-
-    #region Commands
-
-    #region CreateBackupCommand
-
-
-
-    private ICommand _createBackupCommand;
-
-    public ICommand CreateBackupCommand => _createBackupCommand ??=
-        new RelayCommand(OnCreateBackupCommandExecuted, CanCreateBackupCommandExecute);
-
-    private async void OnCreateBackupCommandExecuted(object o)
-    {
-        try
+        private Data.Entities.Backup? _selectedBackup;
+        /// <summary>
+        /// Вибраний бекап зі списку бекапів 
+        /// </summary>
+        public Data.Entities.Backup? SelectedBackup
         {
-            await archivator.PackBackup(SelectedProgram).ConfigureAwait(false);
-            Backups = new ObservableCollection<Data.Entities.Backup>(backupsRepository.Items);
+            get => _selectedBackup;
+            set => Set(ref _selectedBackup, value);
         }
-        catch (Exception ex) { CustomMessageBox.Show(ex.Message, MessageType.Error); }
-    }
 
-    private bool CanCreateBackupCommandExecute(object o)
-    {
-        if (SelectedProgram != null) return true;
-        return false;
-    }
+        #endregion
 
-    #endregion
+        #region SelectedProgram
 
-    #region RestoreBackupCommand
-
-    /// <summary>
-    /// Відновлює обрану програму до стану обраного бекапу
-    /// </summary>
-
-    private ICommand _restoreBackupCommand;
-    public ICommand RestoreBackupCommand => _restoreBackupCommand ??=
-        new RelayCommand(OnRestoreBackupCommandExecuted, CanRestoreBackupCommandExecute);
-    private async void OnRestoreBackupCommandExecuted(object o)
-    {
-        try
+        private Cashalot? _selectedProgram;
+        /// <summary>
+        /// Вибрана програма зі списку встановлених
+        /// </summary>
+        public Cashalot? SelectedProgram
         {
-            await archivator.UnpackBackup(SelectedProgram, SelectedBackup).ConfigureAwait(false);
+            get => _selectedProgram ??= Programs.ElementAtOrDefault(0);
+            set => Set(ref _selectedProgram, value);
         }
-        catch (Exception ex) { CustomMessageBox.Show(ex.Message, MessageType.Error); }
-    }
 
-    private bool CanRestoreBackupCommandExecute(object o)
-    {
-        if (SelectedProgram != null && SelectedBackup != null) return true;
-        return false;
-    }
+        #endregion
 
-    #endregion
+        #region ProgramsViewCollection
 
-    #region DeleteBackupCommand
-
-    private ICommand deleteBackupCommand;
-
-
-    public ICommand DeleteBackupCommand => deleteBackupCommand ??=
-        new RelayCommand(OnDeleteBackupCommandExecuted, CanDeleteBackupCommandExecute);
-    private void OnDeleteBackupCommandExecuted(object o)
-    {
-        fSControler.DeleteFile(SelectedBackup.Path);
-        backupsRepository.Remove(SelectedBackup.Id);
-        Backups.Remove(SelectedBackup);
-        SelectedBackup = null;
-    }
-    private bool CanDeleteBackupCommandExecute(object o) => SelectedBackup != null;
-
-    #endregion
-
-    #region OpenProgramFolderCommand
-    private ICommand openProgramFolder;
-    public ICommand OpenProgramFolderCommand => openProgramFolder ??
-        new RelayCommand(OnOpenProgramFolderCommandExecuted, CanOpenProgramFolderCommandExecute);
-
-    private void OnOpenProgramFolderCommandExecuted(object o)
-    {
-        try
+        private ObservableCollection<Cashalot> _programs = null!;
+        /// <summary>
+        /// Колекція встановлених програм 
+        /// </summary>
+        public ObservableCollection<Cashalot> Programs
         {
-            System.Diagnostics.Process.Start("explorer.exe", SelectedProgram.FolderPath);
+            get => _programs;
+            private set => Set(ref _programs, value);
         }
-        catch (Exception ex)
+
+        #endregion
+
+        #region BackupsViewCollection
+
+        private ObservableCollection<Data.Entities.Backup> _backups;
+        /// <summary>
+        /// Колекція наявних бекапів
+        /// </summary>
+        public ObservableCollection<Data.Entities.Backup> Backups
         {
-            MessageBox.Show(ex.Message);
+            get => _backups;
+            private set => Set(ref _backups, value);
         }
-    }
-    private bool CanOpenProgramFolderCommandExecute(object o) => SelectedProgram != null;
-    #endregion
+
+        #endregion
+
+        #region Commands
+
+        #region CreateBackupCommand
 
 
-    #region PrepareToTestCommand
-    private ICommand prepareToTest;
-    public ICommand PrepareToTestCommand => prepareToTest ??
-        new RelayCommand(OnPrepareToTestCommandExecuted, CanPrepareToTestCommandExecute);
+
+        private ICommand _createBackupCommand;
+
+        public ICommand CreateBackupCommand => _createBackupCommand ??=
+            new RelayCommand(OnCreateBackupCommandExecuted, CanCreateBackupCommandExecute);
+
+        private async void OnCreateBackupCommandExecuted(object o)
+        {
+            try
+            {
+                await archivator.PackBackup(SelectedProgram).ConfigureAwait(false);
+                Backups = new ObservableCollection<Data.Entities.Backup>(backupsRepository.Items);
+            }
+            catch (Exception ex) { CustomMessageBox.Show(ex.Message, MessageType.Error); }
+        }
+
+        private bool CanCreateBackupCommandExecute(object o)
+        {
+            if (SelectedProgram != null) return true;
+            return false;
+        }
+
+        #endregion
+
+        #region RestoreBackupCommand
+
+        /// <summary>
+        /// Відновлює обрану програму до стану обраного бекапу
+        /// </summary>
+
+        private ICommand _restoreBackupCommand;
+        public ICommand RestoreBackupCommand => _restoreBackupCommand ??=
+            new RelayCommand(OnRestoreBackupCommandExecuted, CanRestoreBackupCommandExecute);
+        private async void OnRestoreBackupCommandExecuted(object o)
+        {
+            try
+            {
+                await archivator.UnpackBackup(SelectedProgram, SelectedBackup).ConfigureAwait(false);
+            }
+            catch (Exception ex) { CustomMessageBox.Show(ex.Message, MessageType.Error); }
+        }
+
+        private bool CanRestoreBackupCommandExecute(object o)
+        {
+            if (SelectedProgram != null && SelectedBackup != null) return true;
+            return false;
+        }
+
+        #endregion
+
+        #region DeleteBackupCommand
+
+        private ICommand deleteBackupCommand;
+
+
+        public ICommand DeleteBackupCommand => deleteBackupCommand ??=
+            new RelayCommand(OnDeleteBackupCommandExecuted, CanDeleteBackupCommandExecute);
+        private void OnDeleteBackupCommandExecuted(object o)
+        {
+            fSControler.DeleteFile(SelectedBackup.Path);
+            backupsRepository.Remove(SelectedBackup.Id);
+            Backups.Remove(SelectedBackup);
+            SelectedBackup = null;
+        }
+        private bool CanDeleteBackupCommandExecute(object o) => SelectedBackup != null;
+
+        #endregion
+
+        #region OpenProgramFolderCommand
+        private ICommand openProgramFolder;
+        public ICommand OpenProgramFolderCommand => openProgramFolder ??
+            new RelayCommand(OnOpenProgramFolderCommandExecuted, CanOpenProgramFolderCommandExecute);
+
+        private void OnOpenProgramFolderCommandExecuted(object o)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("explorer.exe", SelectedProgram.FolderPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private bool CanOpenProgramFolderCommandExecute(object o) => SelectedProgram != null;
+        #endregion
+
+
+        #region PrepareToTestCommand
+        private ICommand prepareToTest;
+        public ICommand PrepareToTestCommand => prepareToTest ??
+            new RelayCommand(OnPrepareToTestCommandExecuted, CanPrepareToTestCommandExecute);
 
     private void OnPrepareToTestCommandExecuted(object o)
     {
+        //if (settings.PathToNonReleaseFiles == string.Empty)
+        //{
+        //    CustomMessageBox.Show("Не задано шлях до non release файлів", MessageType.Warning);
+        //    return;
+        //}
+        //if (!fSControler.IsExists(settings.PathToNonReleaseFiles)||)
+        //{
+        //    CustomMessageBox.Show("Заданий шлях до non release файлів некоректний", MessageType.Error);
+        //    return;
+        //}
         if (!fSControler.IsAccessibly(SelectedProgram.PathToExe) || !fSControler.IsAccessibly(Path.Combine(SelectedProgram.FolderPath,"Cashalot.Core.dll")))
         {
             CustomMessageBox.Show("Файли програми використовуються іншою програмою", MessageType.Error);
@@ -207,20 +218,21 @@ public class BackupManagerViewModel : ViewModel
     #endregion
 
 
-    public BackupManagerViewModel(IRepository<Data.Entities.Backup> backups,
-        ICashalotProvider programs,
-        IArchivatorService archivator,
-        IFSControler fSControler)
-    {
-        backupsRepository = backups;
-        Backups = new ObservableCollection<Data.Entities.Backup>(backupsRepository.Items);
-        cashalotProvider = programs;
-        Programs = new ObservableCollection<Cashalot>(cashalotProvider.Programs);
+        public BackupManagerViewModel(IRepository<Data.Entities.Backup> backups,
+            ICashalotProvider programs,
+            IArchivatorService archivator,
+            IFSControler fSControler)
+        {
+            backupsRepository = backups;
+            Backups = new ObservableCollection<Data.Entities.Backup>(backupsRepository.Items);
+            cashalotProvider = programs;
+            Programs = new ObservableCollection<Cashalot>(cashalotProvider.Programs);
 
-        settings = App.Services.GetRequiredService<ISettingsProvider>();
-        this.archivator = archivator;
-        this.fSControler = fSControler;
+            settings = App.Services.GetRequiredService<ISettingsProvider>();
+            this.archivator = archivator;
+            this.fSControler = fSControler;
+        }
+
+
     }
-
-
 }

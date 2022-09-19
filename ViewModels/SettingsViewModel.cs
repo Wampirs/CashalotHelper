@@ -1,5 +1,5 @@
-﻿using CashalotHelper.ViewModels.Base;
-using CashalotHelper.Providers.Settings;
+﻿using CashalotHelper.Providers.Settings;
+using CashalotHelper.ViewModels.Base;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CashalotHelper.ViewModels
@@ -8,20 +8,20 @@ namespace CashalotHelper.ViewModels
     {
         private ISettingsProvider settings;
 
-        public string PathToNonRelease 
+        public string PathToNonRelease
         {
-            get { return settings.PathToNonReleaseFiles; } 
-            set { settings.PathToNonReleaseFiles = value; } 
+            get { return settings.PathToNonReleaseFiles; }
+            set { settings.PathToNonReleaseFiles = value; }
         }
-        public string PathToMaster 
+        public string PathToMaster
         {
-            get { return settings.PathToMasterBranch; } 
-            set { settings.PathToMasterBranch = value;}
+            get { return settings.PathToMasterBranch; }
+            set { settings.PathToMasterBranch = value; }
         }
         public string PathToBrances
-        { 
+        {
             get { return settings.PathToBranchesFolder; }
-            set { settings.PathToBranchesFolder = value;} 
+            set { settings.PathToBranchesFolder = value; }
         }
 
         public SettingsViewModel()

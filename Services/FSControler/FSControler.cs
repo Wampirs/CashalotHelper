@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Windows;
 
 namespace CashalotHelper.Services.FsControler
 {
@@ -30,14 +29,14 @@ namespace CashalotHelper.Services.FsControler
         {
             if (_fileToDelete == null) throw new ArgumentNullException(nameof(_fileToDelete));
             if (!IsAccessibly(_fileToDelete)) throw new Exception($"Файл {_fileToDelete} недосяжний або використовуэться ыншою програмою");
-                try
-                {
-                    File.Delete(_fileToDelete);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"Помилка при видаленні {_fileToDelete}", ex);
-                }
+            try
+            {
+                File.Delete(_fileToDelete);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Помилка при видаленні {_fileToDelete}", ex);
+            }
         }
 
         public int GetFileNumber(string _dirToCountFiles)
@@ -60,7 +59,7 @@ namespace CashalotHelper.Services.FsControler
 
         public bool IsAccessibly(string _pathToCheckAccess)
         {
-            if (_pathToCheckAccess ==null) throw new ArgumentNullException(nameof(_pathToCheckAccess));
+            if (_pathToCheckAccess == null) throw new ArgumentNullException(nameof(_pathToCheckAccess));
             bool isFile = File.Exists(_pathToCheckAccess);
             if (isFile)
             {
@@ -68,7 +67,7 @@ namespace CashalotHelper.Services.FsControler
             }
             foreach (string file in Directory.GetFiles(_pathToCheckAccess))
             {
-                if(!IsAccessibly(file)) return false;     
+                if (!IsAccessibly(file)) return false;
             }
             return true;
         }
@@ -77,7 +76,7 @@ namespace CashalotHelper.Services.FsControler
         {
             if (_pathToEnsureExist == null) throw new ArgumentNullException(nameof(_pathToEnsureExist));
             bool result = false;
-            if (File.Exists(_pathToEnsureExist)|| Directory.Exists(_pathToEnsureExist)) result= true;
+            if (File.Exists(_pathToEnsureExist) || Directory.Exists(_pathToEnsureExist)) result = true;
             return result;
         }
 
@@ -91,12 +90,12 @@ namespace CashalotHelper.Services.FsControler
                 File.Move(tempPath, filePath);
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }
         }
-              
+
 
     }
 }

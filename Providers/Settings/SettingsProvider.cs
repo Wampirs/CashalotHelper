@@ -10,7 +10,7 @@ namespace CashalotHelper.Providers.Settings
         private Configuration _pathToBranchesFolder;
         private Configuration _pathToNonReleaseFiles;
 
-        public string PathToMasterBranch 
+        public string PathToMasterBranch
         {
             get => _pathToMasterBranch.Value;
             set
@@ -19,16 +19,16 @@ namespace CashalotHelper.Providers.Settings
                 SaveChangesToDb(_pathToMasterBranch);
             }
         }
-        public string PathToBranchesFolder 
-        { 
+        public string PathToBranchesFolder
+        {
             get => _pathToBranchesFolder.Value;
             set
             {
                 _pathToBranchesFolder.Value = value;
-                 SaveChangesToDb(_pathToBranchesFolder);
-            } 
+                SaveChangesToDb(_pathToBranchesFolder);
+            }
         }
-        public string PathToNonReleaseFiles 
+        public string PathToNonReleaseFiles
         {
             get => _pathToNonReleaseFiles.Value;
             set
@@ -47,7 +47,7 @@ namespace CashalotHelper.Providers.Settings
         {
             _configRepository.UpdateOrCreate(conf);
         }
-      
+
         private void InitializeProperties()
         {
             if (_configRepository.Get("PathToMasterBranch") == null)

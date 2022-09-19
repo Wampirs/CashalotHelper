@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace CashalotHelper.Infrastructure.Commands.Base;
-
-public abstract class Command : ICommand
+namespace CashalotHelper.Infrastructure.Commands.Base
 {
-    public event EventHandler CanExecuteChanged
+
+    public abstract class Command : ICommand
     {
-        add => CommandManager.RequerySuggested += value;
-        remove => CommandManager.RequerySuggested -= value;
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+        public abstract bool CanExecute(object parameter);
+        public abstract void Execute(object parameter);
     }
-    public abstract bool CanExecute(object parameter);
-    public abstract void Execute(object parameter);
 }

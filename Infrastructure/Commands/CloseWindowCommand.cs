@@ -1,14 +1,16 @@
-﻿using System.Windows;
-using CashalotHelper.Infrastructure.Commands.Base;
+﻿using CashalotHelper.Infrastructure.Commands.Base;
+using System.Windows;
 
-namespace CashalotHelper.Infrastructure.Commands;
-
-public class CloseWindowCommand : Command
+namespace CashalotHelper.Infrastructure.Commands
 {
-    public override bool CanExecute(object parameter) => true;
 
-    public override void Execute(object parameter)
+    public class CloseWindowCommand : Command
     {
-        ((parameter as Window)!).Close();
+        public override bool CanExecute(object parameter) => true;
+
+        public override void Execute(object parameter)
+        {
+            ((parameter as Window)!).Close();
+        }
     }
 }

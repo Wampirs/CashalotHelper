@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CashalotHelper.Data
 {
-    public class DbRepository<T> : IRepository<T> where T : Entity,new()
+    public class DbRepository<T> : IRepository<T> where T : Entity, new()
     {
         private readonly HelperDb _db;
         private readonly DbSet<T> _set;
@@ -27,14 +27,14 @@ namespace CashalotHelper.Data
 
         public async Task<T> GetAsync(Guid id, CancellationToken cancel = default)
         {
-            return await Items.SingleOrDefaultAsync(x => x.Id == id,cancel).ConfigureAwait(false);
+            return await Items.SingleOrDefaultAsync(x => x.Id == id, cancel).ConfigureAwait(false);
         }
 
         public T Add(T item)
         {
             if (item == null) throw new ArgumentNullException(nameof(item));
             _db.Entry(item).State = EntityState.Added;
-            if (AutoSave)_db.SaveChanges();
+            if (AutoSave) _db.SaveChanges();
             return item;
         }
 
@@ -76,7 +76,7 @@ namespace CashalotHelper.Data
             var item = await GetAsync(id, cancel).ConfigureAwait(false);
             if (item == null) return false;
             _db.Remove(item);
-            if(AutoSave) await _db.SaveChangesAsync(cancel).ConfigureAwait(false);
+            if (AutoSave) await _db.SaveChangesAsync(cancel).ConfigureAwait(false);
             return true;
         }
     }

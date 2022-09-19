@@ -16,25 +16,25 @@ namespace CashalotHelper.Models
         #endregion
 
         #region Properties
-        public String FolderPath 
-        { 
+        public String FolderPath
+        {
             get { return folderPath; }
-            set 
+            set
             {
-                folderPath = value; 
+                folderPath = value;
                 OnPropertyChanged("FolderPath");
-            } 
+            }
         }
-        public String Name 
-        { 
+        public String Name
+        {
             get { return name; }
             set
-            { 
+            {
                 name = value;
                 OnPropertyChanged("Name");
-            } 
+            }
         }
-        public bool ForAllUsers 
+        public bool ForAllUsers
         {
             get { return forAllUsers; }
             set
@@ -43,18 +43,18 @@ namespace CashalotHelper.Models
                 OnPropertyChanged("ForAllUsers");
             }
         }
-        public int FileCount 
+        public int FileCount
         {
             get { return fileCount; }
-            set 
-            { 
+            set
+            {
                 fileCount = value;
                 OnPropertyChanged("FileCount");
             }
         }
-        public string PathToExe 
+        public string PathToExe
         {
-            get { return FolderPath + "\\Cashalot.exe"; } 
+            get { return FolderPath + "\\Cashalot.exe"; }
         }
         public String Version
         {
