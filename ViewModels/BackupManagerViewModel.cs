@@ -182,16 +182,6 @@ namespace CashalotHelper.ViewModels
 
     private void OnPrepareToTestCommandExecuted(object o)
     {
-        //if (settings.PathToNonReleaseFiles == string.Empty)
-        //{
-        //    CustomMessageBox.Show("Не задано шлях до non release файлів", MessageType.Warning);
-        //    return;
-        //}
-        //if (!fSControler.IsExists(settings.PathToNonReleaseFiles)||)
-        //{
-        //    CustomMessageBox.Show("Заданий шлях до non release файлів некоректний", MessageType.Error);
-        //    return;
-        //}
         if (!fSControler.IsAccessibly(SelectedProgram.PathToExe) || !fSControler.IsAccessibly(Path.Combine(SelectedProgram.FolderPath,"Cashalot.Core.dll")))
         {
             CustomMessageBox.Show("Файли програми використовуються іншою програмою", MessageType.Error);
