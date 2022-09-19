@@ -1,21 +1,23 @@
-﻿using System;
-using CashalotHelper.Infrastructure.Commands.Base;
+﻿using CashalotHelper.Infrastructure.Commands.Base;
+using System;
 
-namespace CashalotHelper.Infrastructure.Commands;
-
-public class RelayCommand : Command
+namespace CashalotHelper.Infrastructure.Commands
 {
-    private readonly Action<object> _execute;
-    private readonly Func<object, bool> _canExecute;
 
-    public RelayCommand(Action<object>Execute,Func<object,bool>CanExecute)
+    public class RelayCommand : Command
     {
-        _execute = Execute ?? throw new ArgumentNullException(nameof(Execute));
-        _canExecute = CanExecute;
+        private readonly Action<object> _execute;
+        private readonly Func<object, bool> _canExecute;
+
+        public RelayCommand(Action<object> Execute, Func<object, bool> CanExecute)
+        {
+            _execute = Execute ?? throw new ArgumentNullException(nameof(Execute));
+            _canExecute = CanExecute;
+        }
+
+        public override bool CanExecute(object parameter) => _canExecute?.Invoke(parameter) ?? true;
+
+        public override void Execute(object parameter) => _execute(parameter);
+
     }
-
-    public override bool CanExecute(object parameter) => _canExecute?.Invoke(parameter) ?? true;
-
-    public override void Execute(object parameter) => _execute(parameter);
-
 }

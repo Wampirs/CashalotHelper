@@ -46,7 +46,7 @@ namespace CashalotHelper.Providers
                                         FolderPath = MachineKey.OpenSubKey(keyName).GetValue("PATH").ToString(),
                                         FileCount = fsControler.GetFileNumber(MachineKey.OpenSubKey(keyName).GetValue("PATH").ToString()),
                                         Version = fsControler.GetFileVersion(MachineKey.OpenSubKey(keyName).GetValue("PATH").ToString() + "\\Cashalot.exe"),
-                                        ForAllUsers = true, 
+                                        ForAllUsers = true,
 
                                     });
                                     EmptyMachineKey = false;
@@ -94,6 +94,6 @@ namespace CashalotHelper.Providers
                 MessageBox.Show("Cashalot на этом ПК не обнаружен");
             }
         }
-    
+
     }
 }

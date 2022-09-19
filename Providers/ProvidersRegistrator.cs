@@ -1,14 +1,14 @@
 ﻿using CashalotHelper.Providers.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 using CashalotHelper.Providers.Settings;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CashalotHelper.Providers
 {
     public static class ProvidersRegistrator
     {
         public static IServiceCollection AddProviders(this IServiceCollection services) => services
-            .AddSingleton<ISettingsProvider,SettingsProvider>()
-            .AddSingleton<ICashalotProvider,CashalotProvider>()
+            .AddSingleton<ISettingsProvider, SettingsProvider>()
+            .AddSingleton<ICashalotProvider, CashalotProvider>()
             ;
     }
 }

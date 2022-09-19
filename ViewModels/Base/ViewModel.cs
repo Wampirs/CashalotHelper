@@ -1,24 +1,26 @@
-﻿using System.ComponentModel;
+﻿using CashalotHelper.Annotations;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using CashalotHelper.Annotations;
 
-namespace CashalotHelper.ViewModels.Base;
-
-public abstract class ViewModel : INotifyPropertyChanged
+namespace CashalotHelper.ViewModels.Base
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
 
-    [NotifyPropertyChangedInvocator]
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    public abstract class ViewModel : INotifyPropertyChanged
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-    protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-    {
-        if (Equals(value,field)) return false;
-        field = value;
-        OnPropertyChanged(propertyName);
-        return true;
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (Equals(value, field)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
 }

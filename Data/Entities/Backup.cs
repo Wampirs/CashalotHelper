@@ -1,5 +1,5 @@
-﻿using System;
-using CashalotHelper.Data.Entities.Base;
+﻿using CashalotHelper.Data.Entities.Base;
+using System;
 
 namespace CashalotHelper.Data.Entities
 {
